@@ -1,0 +1,1226 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="CLIMB-TRE">
+      
+      
+        <link rel="canonical" href="https://climb-tre.github.io/mscape/">
+      
+      
+        <link rel="prev" href="../pathsafe-analysis/">
+      
+      
+        <link rel="next" href="../mscape-analysis/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Uploader specification - CLIMB-TRE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mscape-uploader-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="CLIMB-TRE" class="md-header__button md-logo" aria-label="CLIMB-TRE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CLIMB-TRE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Uploader specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CLIMB-TRE/climb-tre.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CLIMB-TRE/climb-tre.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../upload/" class="md-tabs__link">
+          
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../common/" class="md-tabs__link">
+          
+  
+  Project specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://CLIMB-TRE.github.io/onyx-client/" class="md-tabs__link">
+        
+  
+    
+  
+  Onyx-client
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="CLIMB-TRE" class="md-nav__button md-logo" aria-label="CLIMB-TRE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CLIMB-TRE
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CLIMB-TRE/climb-tre.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CLIMB-TRE/climb-tre.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploading data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analyse/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Analysing data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Further Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Further Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mscape-examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Analysis examples for mSCAPE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Project specifications
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Project specifications
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PATH-SAFE
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            PATH-SAFE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pathsafe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploader specification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pathsafe-analysis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Analysis specification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    mSCAPE
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            mSCAPE
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Uploader specification
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Uploader specification
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#files-to-be-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files to be provided
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      File naming convention
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-name-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      File name extensions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valid-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valid characters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buckets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buckets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metadata specification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mscape-analysis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Analysis specification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://CLIMB-TRE.github.io/onyx-client/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Onyx-client
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="mscape-uploader-specification">mSCAPE Uploader Specification<a class="headerlink" href="#mscape-uploader-specification" title="Permanent link">&para;</a></h1>
+<h2 id="files-to-be-provided">Files to be provided<a class="headerlink" href="#files-to-be-provided" title="Permanent link">&para;</a></h2>
+<p>For <em>paired-end Illumina</em> sequencing data, suppliers must provide:</p>
+<ul>
+<li>A FASTQ 1 file containing the forward sequencing reads.</li>
+<li>A FASTQ 2 file containing the reverse sequencing reads.</li>
+<li>A CSV file containing the metadata associated with sequencing the sample.</li>
+</ul>
+<p>For <em>ONT</em> sequencing data, suppliers must provide:</p>
+<ul>
+<li>A FASTQ file containing the sequencing reads.</li>
+<li>A CSV file containing the metadata associated with sequencing the sample.</li>
+</ul>
+<h2 id="file-naming-convention">File naming convention<a class="headerlink" href="#file-naming-convention" title="Permanent link">&para;</a></h2>
+<p>The base filenames should be of the form</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mscape.[run_index].[run_id].[extension]
+</span></code></pre></div>
+<p>where:</p>
+<ul>
+<li><code>[run_index]</code> is an identifier that is unique within a sequencing run, e.g. a sequencing barcode identifier, or a 96-well plate co-ordinate.</li>
+<li><code>[run_id]</code> is the name of the sequencing run as given by the supplier's sequencing instrument (not an internal identifier assigned by the supplier).</li>
+<li><code>[extension]</code> is the file extension indicating the file type.</li>
+</ul>
+<h2 id="file-name-extensions">File name extensions<a class="headerlink" href="#file-name-extensions" title="Permanent link">&para;</a></h2>
+<p>For <em>paired-end Illumina</em> sequencing data, the extensions (<code>[extension]</code>) should be:</p>
+<ul>
+<li><code>1.fastq.gz</code> for the forward FASTQ file.</li>
+<li><code>2.fastq.gz</code> for the reverse FASTQ file.</li>
+<li><code>csv</code> for the CSV metadata file.</li>
+</ul>
+<p>For <em>ONT</em> sequencing data, the extensions (<code>[extension]</code>) should be:</p>
+<ul>
+<li><code>fastq.gz</code> for the forward FASTQ file.</li>
+<li><code>csv</code> for the CSV metadata file.</li>
+</ul>
+<h2 id="valid-characters">Valid characters<a class="headerlink" href="#valid-characters" title="Permanent link">&para;</a></h2>
+<p>The <code>[run_index]</code>, <code>[run_id]</code> and <code>[extension]</code> must contain only:</p>
+<ul>
+<li>Letters (<code>A-Z</code>, <code>a-z</code>).</li>
+<li>Numbers (<code>0-9</code>).</li>
+<li>Hyphens (<code>-</code>).</li>
+<li>Underscores (<code>_</code>).</li>
+</ul>
+<h2 id="buckets">Buckets<a class="headerlink" href="#buckets" title="Permanent link">&para;</a></h2>
+<p>Bucket names follow the general convention:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mscape-[sequencing_org]-[platform]-[test_flag]
+</span></code></pre></div>
+<h2 id="metadata-specification">Metadata specification<a class="headerlink" href="#metadata-specification" title="Permanent link">&para;</a></h2>
+<h3 id="required-fields">Required fields<a class="headerlink" href="#required-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>biosample_id</code></td>
+<td><code>text</code></td>
+<td>The sequencing provider's identifier for a sample.</td>
+<td>• Max length: <code>50</code></td>
+</tr>
+<tr>
+<td><code>run_index</code></td>
+<td><code>text</code></td>
+<td>The sequencing provider's identifier for the position of a sample on a run.</td>
+<td>• Max length: <code>50</code></td>
+</tr>
+<tr>
+<td><code>run_id</code></td>
+<td><code>text</code></td>
+<td>Unique identifier assigned to the run by the sequencing instrument.</td>
+<td>• Max length: <code>100</code></td>
+</tr>
+<tr>
+<td><code>input_type</code></td>
+<td><code>choice</code></td>
+<td>The type of input sequenced.</td>
+<td>• Choices: <code>community_standard</code>, <code>negative_control</code>, <code>positive_control</code>, <code>specimen</code>, <code>validation_material</code></td>
+</tr>
+<tr>
+<td><code>sample_source</code></td>
+<td><code>choice</code></td>
+<td>The source from which the sample was collected.</td>
+<td>• Choices: <code>blood</code>, <code>environment</code>, <code>faecal</code>, <code>lower_respiratory</code>, <code>nose_and_throat</code>, <code>other</code>, <code>plasma</code>, <code>stool</code>, <code>tissue</code>, <code>upper_respiratory</code>, <code>urine</code></td>
+</tr>
+<tr>
+<td><code>sample_type</code></td>
+<td><code>choice</code></td>
+<td>The type of sampling method used.</td>
+<td>• Choices: <code>aspirate</code>, <code>bal</code>, <code>biopsy</code>, <code>other</code>, <code>sputum</code>, <code>swab</code></td>
+</tr>
+<tr>
+<td><code>spike_in</code></td>
+<td><code>choice</code></td>
+<td>The type of spike-in used in the run.</td>
+<td>• Choices: <code>none</code></td>
+</tr>
+</tbody>
+</table>
+<p>At least one of the following fields are required:</p>
+<table>
+<thead>
+<tr>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collection_date</code></td>
+<td><code>date</code></td>
+<td>The date the sample was collected.</td>
+<td>• Input formats: <code>YYYY-MM</code>, <code>YYYY-MM-DD</code><br>• Output format: <code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td><code>received_date</code></td>
+<td><code>date</code></td>
+<td>The date the sample was received by the sequencing centre (if collection_date unavailable).</td>
+<td>• Input formats: <code>YYYY-MM</code>, <code>YYYY-MM-DD</code><br>• Output format: <code>YYYY-MM-DD</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-fields">Optional fields<a class="headerlink" href="#optional-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>biosample_source_id</code></td>
+<td><code>text</code></td>
+<td>Unique identifier for an individual to permit multiple samples from the same individual to be linked.</td>
+<td>• Max length: <code>50</code></td>
+</tr>
+<tr>
+<td><code>specimen_type_details</code></td>
+<td><code>choice</code></td>
+<td>Named control or standard for specimens.</td>
+<td>• Required when <code>input_type</code> is: <code>specimen</code><br>• Choices: <code>respiratory_infection</code></td>
+</tr>
+<tr>
+<td><code>control_type_details</code></td>
+<td><code>choice</code></td>
+<td>Named control or standard for positive and negative controls.</td>
+<td>• Required when <code>input_type</code> is: <code>positive_control</code><br>• Required when <code>input_type</code> is: <code>negative_control</code><br>• Choices: <code>water_extraction_control</code></td>
+</tr>
+<tr>
+<td><code>is_approximate_date</code></td>
+<td><code>bool</code></td>
+<td>The date is approximate e.g. the sample is from a public repository and it is unclear whether the date corresponds to collection or publishing.</td>
+<td>• Default: <code>False</code></td>
+</tr>
+<tr>
+<td><code>batch_id</code></td>
+<td><code>text</code></td>
+<td>Used to identify samples prepared in the same laboratory batch (e.g. extraction, library and/or sequencing).</td>
+<td>• Max length: <code>100</code></td>
+</tr>
+<tr>
+<td><code>study_id</code></td>
+<td><code>choice</code></td>
+<td>Used to identify study or if NHS residual sample.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>study_centre_id</code></td>
+<td><code>text</code></td>
+<td>Used to identify sequencing centre.</td>
+<td>• Max length: <code>100</code></td>
+</tr>
+<tr>
+<td><code>sequence_purpose</code></td>
+<td><code>choice</code></td>
+<td>Used to differentiate between clinical or research studies.</td>
+<td>• Choices: <code>clinical</code>, <code>research</code></td>
+</tr>
+<tr>
+<td><code>governance_status</code></td>
+<td><code>choice</code></td>
+<td>Did the patient consent to their sample being used for research purposes or not.</td>
+<td>• Default: <code>no_consent_for_research</code><br>• Choices: <code>consented_for_research</code>, <code>no_consent_for_research</code>, <code>open</code></td>
+</tr>
+<tr>
+<td><code>iso_country</code></td>
+<td><code>choice</code></td>
+<td>Country that the sample was collected in, using ISO-3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes), unless within United Kingdom. If so, use ISO-3166-2:GB (https://en.wikipedia.org/wiki/ISO_3166-2:GB).</td>
+<td>• Choices: <code>GB</code>, <code>GB-ENG</code>, <code>GB-NIR</code>, <code>GB-SCT</code>, <code>GB-WLS</code></td>
+</tr>
+<tr>
+<td><code>iso_region</code></td>
+<td><code>choice</code></td>
+<td>Region that the sample was collected in, using the second level subdivision codes of ISO-3166-2:GB (https://www.iso.org/obp/ui/#iso:code:3166:GB).</td>
+<td>• Requires: <code>iso_country</code><br>• Choices: <code>GB-ABC</code>, <code>GB-ABD</code>, <code>GB-ABE</code>, <code>GB-AGB</code>, <code>GB-AGY</code>, <code>GB-AND</code>, <code>GB-ANN</code>, <code>GB-ANS</code>, <code>GB-BAS</code>, <code>GB-BBD</code>, <code>GB-BCP</code>, <code>GB-BDF</code>, <code>GB-BDG</code>, <code>GB-BEN</code>, <code>GB-BEX</code>, <code>GB-BFS</code>, <code>GB-BGE</code>, <code>GB-BGW</code>, <code>GB-BIR</code>, <code>GB-BKM</code>, ...</td>
+</tr>
+<tr>
+<td><code>extraction_enrichment_protocol</code></td>
+<td><code>text</code></td>
+<td>Details of nucleic acid extraction and optional enrichment steps.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>library_protocol</code></td>
+<td><code>text</code></td>
+<td>Details of sequencing library construction.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sequencing_protocol</code></td>
+<td><code>text</code></td>
+<td>Details of sequencing.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bioinformatics_protocol</code></td>
+<td><code>text</code></td>
+<td>Detail of initial bioinformatics protocol, for example versions of basecalling software and models used, any read quality filtering/trimming employed.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dehumanisation_protocol</code></td>
+<td><code>text</code></td>
+<td>Details of bioinformatics method used for human read removal.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>is_public_dataset</code></td>
+<td><code>bool</code></td>
+<td>The sample is from a public dataset. Please only set this after it has been made public.</td>
+<td>• Default: <code>False</code></td>
+</tr>
+<tr>
+<td><code>public_database_name</code></td>
+<td><code>choice</code></td>
+<td>The public repository where the data is.</td>
+<td>• Choices: <code>ENA</code>, <code>SRA</code></td>
+</tr>
+<tr>
+<td><code>public_database_accession</code></td>
+<td><code>text</code></td>
+<td>The accession for the data in the public database.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>Last modified 2024-03-25 15:29:15+00:00 (ac20a21)</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "toc.integrate", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
