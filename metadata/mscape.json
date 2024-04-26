@@ -70,6 +70,7 @@
                 "add"
             ],
             "values": [
+                "asymptomatic",
                 "respiratory_infection"
             ],
             "restrictions": [
@@ -84,7 +85,10 @@
                 "add"
             ],
             "values": [
-                "water_extraction_control"
+                "NIBSC_11/242",
+                "NIBSC_20/170",
+                "water_extraction_control",
+                "zymo-mc_D6300"
             ],
             "restrictions": [
                 "Required when input_type is: positive_control",
@@ -136,7 +140,9 @@
                 "add"
             ],
             "values": [
-                "none"
+                "ERCC-RNA_4456740",
+                "none",
+                "zymo_D6320"
             ]
         },
         "collection_date": {
