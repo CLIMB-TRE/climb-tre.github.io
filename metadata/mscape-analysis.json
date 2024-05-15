@@ -219,6 +219,7 @@
             ],
             "values": [
                 "ERCC-RNA_4456740",
+                "ms2-phage",
                 "none",
                 "zymo_D6320"
             ]
@@ -353,7 +354,8 @@
                 "GB-ENG",
                 "GB-NIR",
                 "GB-SCT",
-                "GB-WLS"
+                "GB-WLS",
+                "US"
             ]
         },
         "iso_region": {
