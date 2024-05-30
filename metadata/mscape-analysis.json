@@ -224,6 +224,22 @@
                 "zymo_D6320"
             ]
         },
+        "spike_in_result": {
+            "description": "Result assigned by scylla for the provided spike-in.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "fail",
+                "partial",
+                "pass"
+            ]
+        },
         "collection_date": {
             "description": "The date the sample was collected.",
             "type": "date",
@@ -1049,6 +1065,54 @@
                 "raw_rank": {
                     "description": "The rank of the taxa including an intermediate grading.",
                     "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                }
+            }
+        },
+        "spike_in_info": {
+            "description": "Table containing taxonomic results found for the provided spike-in.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "reference_header": {
+                    "description": "Reference header for the individual sequence within the provided spike-in.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "mapped_count": {
+                    "description": "Number of reads which aligned to a reference sequence for the provided spike-in.",
+                    "type": "integer",
                     "required": true,
                     "actions": [
                         "get",
