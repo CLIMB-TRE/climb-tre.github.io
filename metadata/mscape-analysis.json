@@ -1070,6 +1070,16 @@
                         "get",
                         "filter"
                     ]
+                },
+                "is_spike_in": {
+                    "description": "The taxa is a spike-in.",
+                    "type": "bool",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "default": false
                 }
             }
         },
