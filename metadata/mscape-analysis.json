@@ -309,6 +309,9 @@
                 "list",
                 "filter",
                 "history"
+            ],
+            "values": [
+                "PRJNA818777"
             ]
         },
         "study_centre_id": {

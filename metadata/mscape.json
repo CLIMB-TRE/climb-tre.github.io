@@ -200,6 +200,9 @@
             "required": false,
             "actions": [
                 "add"
+            ],
+            "values": [
+                "PRJNA818777"
             ]
         },
         "study_centre_id": {
