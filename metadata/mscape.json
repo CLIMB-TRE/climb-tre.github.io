@@ -144,6 +144,7 @@
                 "ERCC-RNA_4456740",
                 "ms2-phage",
                 "none",
+                "phix",
                 "zymo_D6320",
                 "zymo_D6321"
             ]
@@ -250,6 +251,7 @@
                 "add"
             ],
             "values": [
+                "CN",
                 "GB",
                 "GB-ENG",
                 "GB-NIR",
