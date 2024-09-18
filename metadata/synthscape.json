@@ -820,21 +820,27 @@
         },
         "spiked_ids": {
             "description": "JSON list of taxon ids included in the spike-in.",
-            "type": "array<integer>",
+            "type": "array",
             "required": false,
             "actions": [
                 "add"
             ],
-            "default": []
+            "default": [],
+            "restrictions": [
+                "Array type: integer"
+            ]
         },
         "applications": {
             "description": "JSON list of applications.",
-            "type": "array<text>",
+            "type": "array",
             "required": false,
             "actions": [
                 "add"
             ],
-            "default": []
+            "default": [],
+            "restrictions": [
+                "Array type: text"
+            ]
         },
         "methods": {
             "description": "JSON dictionary containing methods.",
