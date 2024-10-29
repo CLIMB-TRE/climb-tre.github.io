@@ -107,6 +107,21 @@
                 "illumina"
             ]
         },
+        "submitted_species": {
+            "description": "The NCBI taxonomy id provided for the sample.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "28901",
+                "562"
+            ]
+        },
         "sample_accession": {
             "description": "Sample accession number if sequence is publically available in SRA.",
             "type": "text",

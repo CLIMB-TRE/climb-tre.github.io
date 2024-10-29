@@ -47,6 +47,18 @@
                 "Max length: 100"
             ]
         },
+        "submitted_species": {
+            "description": "The NCBI taxonomy id provided for the sample.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "add"
+            ],
+            "values": [
+                "28901",
+                "562"
+            ]
+        },
         "sample_accession": {
             "description": "Sample accession number if sequence is publically available in SRA.",
             "type": "text",
