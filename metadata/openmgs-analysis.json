@@ -1,0 +1,1388 @@
+{
+    "name": "openMGS",
+    "description": "Open Meta-Genomic Surveillance",
+    "version": "0.1.0",
+    "fields": {
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 12"
+            ]
+        },
+        "published_date": {
+            "description": "The date the project record was published in Onyx.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "site": {
+            "description": "The site or sequencing centre providing the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "analysis"
+            ]
+        },
+        "biosample_id": {
+            "description": "The sequencing provider's identifier for a sample.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "biosample_source_id": {
+            "description": "Unique identifier for an individual to permit multiple samples from the same individual to be linked.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "run_id": {
+            "description": "Unique identifier assigned to the run by the sequencing instrument.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "illumina",
+                "illumina.se",
+                "ont"
+            ]
+        },
+        "input_type": {
+            "description": "The type of input sequenced.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "community_standard",
+                "negative_control",
+                "positive_control",
+                "specimen",
+                "validation_material"
+            ]
+        },
+        "specimen_type_details": {
+            "description": "Named control or standard for specimens.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "asymptomatic",
+                "respiratory_infection"
+            ],
+            "restrictions": [
+                "Required when input_type is: specimen"
+            ]
+        },
+        "control_type_details": {
+            "description": "Named control or standard for positive and negative controls.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "NIBSC_11/242",
+                "NIBSC_20/170",
+                "resp_matrix_mc110",
+                "water_extraction_control",
+                "zepto_rp2.1",
+                "zymo-mc_D6300"
+            ],
+            "restrictions": [
+                "Required when input_type is: positive_control",
+                "Required when input_type is: negative_control"
+            ]
+        },
+        "sample_source": {
+            "description": "The source from which the sample was collected.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "blood",
+                "environment",
+                "faecal",
+                "lower_respiratory",
+                "nose_and_throat",
+                "other",
+                "plasma",
+                "pleural_fluid",
+                "stool",
+                "tissue",
+                "upper_respiratory",
+                "urine"
+            ]
+        },
+        "sample_type": {
+            "description": "The type of sampling method used.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "aspirate",
+                "bal",
+                "biopsy",
+                "other",
+                "sputum",
+                "swab"
+            ]
+        },
+        "spike_in": {
+            "description": "The type of spike-in used in the run.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "ERCC-RNA_4456740",
+                "ms2-phage",
+                "none",
+                "phix",
+                "tobacco_mosaic_virus",
+                "zymo_D6320",
+                "zymo_D6321"
+            ]
+        },
+        "spike_in_result": {
+            "description": "Result assigned by scylla for the provided spike-in.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "fail",
+                "partial",
+                "pass"
+            ]
+        },
+        "collection_date": {
+            "description": "The date the sample was collected.",
+            "type": "date",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM, YYYY-MM-DD",
+                "Output format: YYYY-MM-DD",
+                "At least one required: collection_date, received_date"
+            ]
+        },
+        "received_date": {
+            "description": "The date the sample was received by the sequencing centre (if collection_date unavailable).",
+            "type": "date",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM, YYYY-MM-DD",
+                "Output format: YYYY-MM-DD",
+                "At least one required: collection_date, received_date"
+            ]
+        },
+        "is_approximate_date": {
+            "description": "The date is approximate e.g. the sample is from a public repository and it is unclear whether the date corresponds to collection or publishing.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "batch_id": {
+            "description": "Used to identify samples prepared in the same laboratory batch (e.g. extraction, library and/or sequencing).",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "study_id": {
+            "description": "Used to identify study or if NHS residual sample.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "study_centre_id": {
+            "description": "Used to identify sequencing centre.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "sequence_purpose": {
+            "description": "Used to differentiate between clinical or research studies.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "clinical",
+                "research"
+            ]
+        },
+        "governance_status": {
+            "description": "Did the patient consent to their sample being used for research purposes or not.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": "no_consent_for_research",
+            "values": [
+                "consented_for_research",
+                "no_consent_for_research",
+                "open"
+            ]
+        },
+        "iso_country": {
+            "description": "Country that the sample was collected in, using ISO-3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), unless within United Kingdom. If so, use ISO-3166-2:GB (https://en.wikipedia.org/wiki/ISO_3166-2:GB).",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "AD",
+                "AE",
+                "AF",
+                "AG",
+                "AI",
+                "AL",
+                "AM",
+                "AO",
+                "AQ",
+                "AR",
+                "AS",
+                "AT",
+                "AU",
+                "AW",
+                "AX",
+                "AZ",
+                "BA",
+                "BB",
+                "BD",
+                "BE",
+                "BF",
+                "BG",
+                "BH",
+                "BI",
+                "BJ",
+                "BL",
+                "BM",
+                "BN",
+                "BO",
+                "BQ",
+                "BR",
+                "BS",
+                "BT",
+                "BV",
+                "BW",
+                "BY",
+                "BZ",
+                "CA",
+                "CC",
+                "CD",
+                "CF",
+                "CG",
+                "CH",
+                "CI",
+                "CK",
+                "CL",
+                "CM",
+                "CN",
+                "CO",
+                "CR",
+                "CU",
+                "CV",
+                "CW",
+                "CX",
+                "CY",
+                "CZ",
+                "DE",
+                "DJ",
+                "DK",
+                "DM",
+                "DO",
+                "DZ",
+                "EC",
+                "EE",
+                "EG",
+                "EH",
+                "ER",
+                "ES",
+                "ET",
+                "FI",
+                "FJ",
+                "FK",
+                "FM",
+                "FO",
+                "FR",
+                "GA",
+                "GB",
+                "GB-ENG",
+                "GB-NIR",
+                "GB-SCT",
+                "GB-WLS",
+                "GD",
+                "GE",
+                "GF",
+                "GG",
+                "GH",
+                "GI",
+                "GL",
+                "GM",
+                "GN",
+                "GP",
+                "GQ",
+                "GR",
+                "GS",
+                "GT",
+                "GU",
+                "GW",
+                "GY",
+                "HK",
+                "HM",
+                "HN",
+                "HR",
+                "HT",
+                "HU",
+                "ID",
+                "IE",
+                "IL",
+                "IM",
+                "IN",
+                "IO",
+                "IQ",
+                "IR",
+                "IS",
+                "IT",
+                "JE",
+                "JM",
+                "JO",
+                "JP",
+                "KE",
+                "KG",
+                "KH",
+                "KI",
+                "KM",
+                "KN",
+                "KP",
+                "KR",
+                "KW",
+                "KY",
+                "KZ",
+                "LA",
+                "LB",
+                "LC",
+                "LI",
+                "LK",
+                "LR",
+                "LS",
+                "LT",
+                "LU",
+                "LV",
+                "LY",
+                "MA",
+                "MC",
+                "MD",
+                "ME",
+                "MF",
+                "MG",
+                "MH",
+                "MK",
+                "ML",
+                "MM",
+                "MN",
+                "MO",
+                "MP",
+                "MQ",
+                "MR",
+                "MS",
+                "MT",
+                "MU",
+                "MV",
+                "MW",
+                "MX",
+                "MY",
+                "MZ",
+                "NA",
+                "NC",
+                "NE",
+                "NF",
+                "NG",
+                "NI",
+                "NL",
+                "NO",
+                "NP",
+                "NR",
+                "NU",
+                "NZ",
+                "OM",
+                "PA",
+                "PE",
+                "PF",
+                "PG",
+                "PH",
+                "PK",
+                "PL",
+                "PM",
+                "PN",
+                "PR",
+                "PS",
+                "PT",
+                "PW",
+                "PY",
+                "QA",
+                "RE",
+                "RO",
+                "RS",
+                "RU",
+                "RW",
+                "SA",
+                "SB",
+                "SC",
+                "SD",
+                "SE",
+                "SG",
+                "SH",
+                "SI",
+                "SJ",
+                "SK",
+                "SL",
+                "SM",
+                "SN",
+                "SO",
+                "SR",
+                "SS",
+                "ST",
+                "SV",
+                "SX",
+                "SY",
+                "SZ",
+                "TC",
+                "TD",
+                "TF",
+                "TG",
+                "TH",
+                "TJ",
+                "TK",
+                "TL",
+                "TM",
+                "TN",
+                "TO",
+                "TR",
+                "TT",
+                "TV",
+                "TW",
+                "TZ",
+                "UA",
+                "UG",
+                "UM",
+                "US",
+                "UY",
+                "UZ",
+                "VA",
+                "VC",
+                "VE",
+                "VG",
+                "VI",
+                "VN",
+                "VU",
+                "WF",
+                "WS",
+                "YE",
+                "YT",
+                "ZA",
+                "ZM",
+                "ZW"
+            ]
+        },
+        "iso_region": {
+            "description": "Region that the sample was collected in, using the second level subdivision codes of ISO-3166-2:GB (https://www.iso.org/obp/ui/#iso:code:3166:GB).",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "GB-ABC",
+                "GB-ABD",
+                "GB-ABE",
+                "GB-AGB",
+                "GB-AGY",
+                "GB-AND",
+                "GB-ANN",
+                "GB-ANS",
+                "GB-BAS",
+                "GB-BBD",
+                "GB-BCP",
+                "GB-BDF",
+                "GB-BDG",
+                "GB-BEN",
+                "GB-BEX",
+                "GB-BFS",
+                "GB-BGE",
+                "GB-BGW",
+                "GB-BIR",
+                "GB-BKM",
+                "GB-BNE",
+                "GB-BNH",
+                "GB-BNS",
+                "GB-BOL",
+                "GB-BPL",
+                "GB-BRC",
+                "GB-BRD",
+                "GB-BRY",
+                "GB-BST",
+                "GB-BUR",
+                "GB-CAM",
+                "GB-CAY",
+                "GB-CBF",
+                "GB-CCG",
+                "GB-CGN",
+                "GB-CHE",
+                "GB-CHW",
+                "GB-CLD",
+                "GB-CLK",
+                "GB-CMA",
+                "GB-CMD",
+                "GB-CMN",
+                "GB-CON",
+                "GB-COV",
+                "GB-CRF",
+                "GB-CRY",
+                "GB-CWY",
+                "GB-DAL",
+                "GB-DBY",
+                "GB-DEN",
+                "GB-DER",
+                "GB-DEV",
+                "GB-DGY",
+                "GB-DNC",
+                "GB-DND",
+                "GB-DOR",
+                "GB-DRS",
+                "GB-DUD",
+                "GB-DUR",
+                "GB-EAL",
+                "GB-EAY",
+                "GB-EDH",
+                "GB-EDU",
+                "GB-ELN",
+                "GB-ELS",
+                "GB-ENF",
+                "GB-ERW",
+                "GB-ERY",
+                "GB-ESS",
+                "GB-ESX",
+                "GB-FAL",
+                "GB-FIF",
+                "GB-FLN",
+                "GB-FMO",
+                "GB-GAT",
+                "GB-GLG",
+                "GB-GLS",
+                "GB-GRE",
+                "GB-GWN",
+                "GB-HAL",
+                "GB-HAM",
+                "GB-HAV",
+                "GB-HCK",
+                "GB-HEF",
+                "GB-HIL",
+                "GB-HLD",
+                "GB-HMF",
+                "GB-HNS",
+                "GB-HPL",
+                "GB-HRT",
+                "GB-HRW",
+                "GB-HRY",
+                "GB-IOS",
+                "GB-IOW",
+                "GB-ISL",
+                "GB-IVC",
+                "GB-KEC",
+                "GB-KEN",
+                "GB-KHL",
+                "GB-KIR",
+                "GB-KTT",
+                "GB-KWL",
+                "GB-LAN",
+                "GB-LBC",
+                "GB-LBH",
+                "GB-LCE",
+                "GB-LDS",
+                "GB-LEC",
+                "GB-LEW",
+                "GB-LIN",
+                "GB-LIV",
+                "GB-LND",
+                "GB-LUT",
+                "GB-MAN",
+                "GB-MDB",
+                "GB-MDW",
+                "GB-MEA",
+                "GB-MIK",
+                "GB-MLN",
+                "GB-MON",
+                "GB-MRT",
+                "GB-MRY",
+                "GB-MTY",
+                "GB-MUL",
+                "GB-NAY",
+                "GB-NBL",
+                "GB-NEL",
+                "GB-NET",
+                "GB-NFK",
+                "GB-NGM",
+                "GB-NLK",
+                "GB-NLN",
+                "GB-NMD",
+                "GB-NNH",
+                "GB-NSM",
+                "GB-NTL",
+                "GB-NTT",
+                "GB-NTY",
+                "GB-NWM",
+                "GB-NWP",
+                "GB-NYK",
+                "GB-OLD",
+                "GB-ORK",
+                "GB-OXF",
+                "GB-PEM",
+                "GB-PKN",
+                "GB-PLY",
+                "GB-POR",
+                "GB-POW",
+                "GB-PTE",
+                "GB-RCC",
+                "GB-RCH",
+                "GB-RCT",
+                "GB-RDB",
+                "GB-RDG",
+                "GB-RFW",
+                "GB-RIC",
+                "GB-ROT",
+                "GB-RUT",
+                "GB-SAW",
+                "GB-SAY",
+                "GB-SCB",
+                "GB-SFK",
+                "GB-SFT",
+                "GB-SGC",
+                "GB-SHF",
+                "GB-SHN",
+                "GB-SHR",
+                "GB-SKP",
+                "GB-SLF",
+                "GB-SLG",
+                "GB-SLK",
+                "GB-SND",
+                "GB-SOL",
+                "GB-SOM",
+                "GB-SOS",
+                "GB-SRY",
+                "GB-STE",
+                "GB-STG",
+                "GB-STH",
+                "GB-STN",
+                "GB-STS",
+                "GB-STT",
+                "GB-STY",
+                "GB-SWA",
+                "GB-SWD",
+                "GB-SWK",
+                "GB-TAM",
+                "GB-TFW",
+                "GB-THR",
+                "GB-TOB",
+                "GB-TOF",
+                "GB-TRF",
+                "GB-TWH",
+                "GB-VGL",
+                "GB-WAR",
+                "GB-WBK",
+                "GB-WDU",
+                "GB-WFT",
+                "GB-WGN",
+                "GB-WIL",
+                "GB-WKF",
+                "GB-WLL",
+                "GB-WLN",
+                "GB-WLV",
+                "GB-WND",
+                "GB-WNH",
+                "GB-WNM",
+                "GB-WOK",
+                "GB-WOR",
+                "GB-WRL",
+                "GB-WRT",
+                "GB-WRX",
+                "GB-WSM",
+                "GB-WSX",
+                "GB-YOR",
+                "GB-ZET"
+            ],
+            "restrictions": [
+                "Requires: iso_country"
+            ]
+        },
+        "extraction_enrichment_protocol": {
+            "description": "Details of nucleic acid extraction and optional enrichment steps.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "library_protocol": {
+            "description": "Details of sequencing library construction.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "sequencing_protocol": {
+            "description": "Details of sequencing.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "bioinformatics_protocol": {
+            "description": "Detail of initial bioinformatics protocol, for example versions of basecalling software and models used, any read quality filtering/trimming employed.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "dehumanisation_protocol": {
+            "description": "Details of bioinformatics method used for human read removal.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "is_public_dataset": {
+            "description": "The sample is from a public dataset. Please only set this after it has been made public.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "public_database_name": {
+            "description": "The public repository where the data is.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "ENA",
+                "SRA"
+            ]
+        },
+        "public_database_accession": {
+            "description": "The accession for the data in the public database.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "ingest_report": {
+            "description": "HTML report summarising the read profile and taxa identified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "taxon_reports": {
+            "description": "Folder of all classification output files.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "human_filtered_reads_1": {
+            "description": "Compressed FASTQ of input reads that have been filtered for human reads.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "human_filtered_reads_2": {
+            "description": "Compressed FASTQ of input reads that have been filtered for human reads.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "unclassified_reads_1": {
+            "description": "Compressed FASTQ of input reads which could not be classified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "unclassified_reads_2": {
+            "description": "Compressed FASTQ of input reads which could not be classified.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_reads_1": {
+            "description": "Compressed FASTQ of input reads which were classified as viral.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_reads_2": {
+            "description": "Compressed FASTQ of input reads which were classified as viral.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_and_unclassified_reads_1": {
+            "description": "Compressed FASTQ of input reads which were classified as viral or were unclassified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_and_unclassified_reads_2": {
+            "description": "Compressed FASTQ of input reads which were classified as viral or were unclassified.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "classifier": {
+            "description": "The classifier used.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "Kraken2"
+            ]
+        },
+        "classifier_version": {
+            "description": "Version of the classifier used.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "classifier_db": {
+            "description": "Database used for read classification.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "PlusPF"
+            ]
+        },
+        "classifier_db_date": {
+            "description": "Date classifier database was produced.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM-DD",
+                "Output format: YYYY-MM-DD"
+            ]
+        },
+        "ncbi_taxonomy_date": {
+            "description": "Date that the NCBI taxonomy dump was produced.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM-DD",
+                "Output format: YYYY-MM-DD"
+            ]
+        },
+        "scylla_version": {
+            "description": "Version of the scylla pipeline used.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "taxa_files": {
+            "description": "Table of all species level taxa extracted.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "n_reads": {
+                    "description": "The number of reads extracted for the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "avg_quality": {
+                    "description": "The mean quality of reads extracted for the taxa.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "mean_len": {
+                    "description": "The mean length of reads extracted for the taxa.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "rank": {
+                    "description": "The rank of the taxa.",
+                    "type": "choice",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "C",
+                        "D",
+                        "F",
+                        "G",
+                        "K",
+                        "O",
+                        "P",
+                        "R",
+                        "S",
+                        "U"
+                    ]
+                },
+                "fastq_1": {
+                    "description": "Compressed FASTQ of extracted reads for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "fastq_2": {
+                    "description": "Compressed FASTQ of extracted reads for the taxa.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                }
+            }
+        },
+        "classifier_calls": {
+            "description": "Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "percentage": {
+                    "description": "The percentage of the (dehumanised) sample that the taxa represents.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "count_descendants": {
+                    "description": "The number of reads mapping to this taxa and all descendant taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "count_direct": {
+                    "description": "The number of reads mapping directly to the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "rank": {
+                    "description": "The rank of the taxa.",
+                    "type": "choice",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "C",
+                        "D",
+                        "F",
+                        "G",
+                        "K",
+                        "O",
+                        "P",
+                        "R",
+                        "S",
+                        "U"
+                    ]
+                },
+                "raw_rank": {
+                    "description": "The rank of the taxa including an intermediate grading.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "is_spike_in": {
+                    "description": "The taxa is a spike-in.",
+                    "type": "bool",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "default": false
+                }
+            }
+        },
+        "spike_in_info": {
+            "description": "Table containing taxonomic results found for the provided spike-in.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "reference_header": {
+                    "description": "Reference header for the individual sequence within the provided spike-in.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "mapped_count": {
+                    "description": "Number of reads which aligned to a reference sequence for the provided spike-in.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                }
+            }
+        }
+    }
+}
