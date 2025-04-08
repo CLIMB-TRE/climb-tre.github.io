@@ -1,8 +1,38 @@
 {
     "name": "mSCAPE",
-    "description": "Metagenomics Surveillance, Collaboration and Analysis Programme.",
+    "description": "Metagenomics Surveillance, Collaboration and Analysis Programme",
+    "object_type": "records",
     "version": "0.1.0",
     "fields": {
+        "is_published": {
+            "description": "Indicator for whether an object has been published.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "add"
+            ],
+            "default": true
+        },
+        "site": {
+            "description": "The site or sequencing centre providing the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "add"
+            ],
+            "values": [
+                "bham",
+                "cuh",
+                "gosh",
+                "gstt",
+                "nuth",
+                "public",
+                "ripl",
+                "uclh",
+                "uhs",
+                "ukhsa"
+            ]
+        },
         "biosample_id": {
             "description": "The sequencing provider's identifier for a sample.",
             "type": "text",
@@ -47,12 +77,26 @@
                 "Max length: 100"
             ]
         },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "add"
+            ],
+            "values": [
+                "illumina",
+                "illumina.se",
+                "ont"
+            ]
+        },
         "input_type": {
             "description": "The type of input sequenced.",
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "community_standard",
@@ -67,7 +111,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "asymptomatic",
@@ -82,7 +127,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "NIBSC_11/242",
@@ -102,7 +148,8 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "blood",
@@ -124,7 +171,8 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "aspirate",
@@ -140,7 +188,8 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "ERCC-RNA_4456740",
@@ -157,7 +206,8 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM, YYYY-MM-DD",
@@ -170,7 +220,8 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM, YYYY-MM-DD",
@@ -183,7 +234,8 @@
             "type": "bool",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "default": false
         },
@@ -192,7 +244,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -203,7 +256,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -214,7 +268,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -225,7 +280,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "clinical",
@@ -237,7 +293,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "default": "no_consent_for_research",
             "values": [
@@ -251,7 +308,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "AD",
@@ -514,7 +572,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "GB-ABC",
@@ -744,7 +803,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         },
         "library_protocol": {
@@ -752,7 +812,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         },
         "sequencing_protocol": {
@@ -760,7 +821,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         },
         "bioinformatics_protocol": {
@@ -768,7 +830,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         },
         "dehumanisation_protocol": {
@@ -776,7 +839,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         },
         "is_public_dataset": {
@@ -784,7 +848,8 @@
             "type": "bool",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "default": false
         },
@@ -793,7 +858,8 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ],
             "values": [
                 "ENA",
@@ -805,7 +871,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "change"
             ]
         }
     }

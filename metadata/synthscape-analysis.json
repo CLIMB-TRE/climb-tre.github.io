@@ -1,24 +1,11 @@
 {
     "name": "synthSCAPE",
-    "description": "Synthetic dataset for the mSCAPE project.",
+    "description": "Synthetic dataset for mSCAPE",
+    "object_type": "records",
     "version": "0.1.0",
     "fields": {
-        "climb_id": {
-            "description": "Unique identifier for a project record in Onyx.",
-            "type": "text",
-            "required": true,
-            "actions": [
-                "get",
-                "list",
-                "filter",
-                "history"
-            ],
-            "restrictions": [
-                "Max length: 12"
-            ]
-        },
         "published_date": {
-            "description": "The date the project record was published in Onyx.",
+            "description": "The date the object was published in Onyx.",
             "type": "date",
             "required": true,
             "actions": [
@@ -46,6 +33,20 @@
                 "bham",
                 "synthscape",
                 "ukhsa"
+            ]
+        },
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 12"
             ]
         },
         "biosample_id": {
