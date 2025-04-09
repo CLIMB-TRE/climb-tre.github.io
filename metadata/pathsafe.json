@@ -1,14 +1,41 @@
 {
     "name": "PATH-SAFE",
-    "description": "Pathogen Surveillance in Agriculture, Food and Environment Programme.",
+    "description": "Pathogen Surveillance in Agriculture, Food and Environment",
+    "object_type": "records",
     "version": "0.1.0",
     "fields": {
+        "is_published": {
+            "description": "Indicator for whether an object has been published.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "testadd"
+            ],
+            "default": true
+        },
+        "site": {
+            "description": "Laboratory, organisation or agency the sample has been submitted by.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "testadd"
+            ],
+            "values": [
+                "APHA",
+                "FSA",
+                "FSS",
+                "PHS",
+                "SSSCDRL",
+                "UKHSA"
+            ]
+        },
         "biosample_id": {
             "description": "The sequencing providers identifier for a sample.",
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -19,7 +46,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -30,7 +58,8 @@
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -41,10 +70,22 @@
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 100"
+            ]
+        },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "testadd"
+            ],
+            "values": [
+                "illumina"
             ]
         },
         "submitted_species": {
@@ -52,7 +93,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "1639",
@@ -65,7 +109,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "enterobase_barcode": {
@@ -73,7 +120,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "collection_date": {
@@ -81,7 +131,10 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM",
@@ -93,7 +146,10 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM",
@@ -105,7 +161,10 @@
             "type": "integer",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "year": {
@@ -113,7 +172,10 @@
             "type": "integer",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "sequence_org": {
@@ -121,13 +183,19 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "APHA",
                 "FSA",
                 "FSS",
+                "OTHER",
                 "PHS",
+                "PHW",
+                "SEPA",
                 "SSSCDRL",
                 "UKHSA"
             ]
@@ -137,10 +205,14 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
-                "Requires: sequence_org"
+                "Requires: sequence_org",
+                "Required when sequence_org is: OTHER"
             ]
         },
         "data_steward": {
@@ -148,7 +220,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "APHA",
@@ -157,6 +232,7 @@
                 "OTHER",
                 "PHS",
                 "PHW",
+                "SEPA",
                 "SSSCDRL",
                 "UKHSA"
             ]
@@ -166,9 +242,13 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
+                "Requires: data_steward",
                 "Required when data_steward is: OTHER"
             ]
         },
@@ -177,7 +257,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "animal",
@@ -201,7 +284,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "GB",
@@ -216,7 +302,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "GB-ABC",
@@ -446,7 +535,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "active_surveillance",
@@ -468,9 +560,13 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
+                "Requires: sample_purpose",
                 "Required when sample_purpose is: other"
             ]
         },
@@ -479,7 +575,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "library_kit": {
@@ -487,7 +586,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "is_multiplexed": {
@@ -495,7 +597,10 @@
             "type": "bool",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         }
     }

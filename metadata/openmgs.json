@@ -1,14 +1,36 @@
 {
     "name": "openMGS",
     "description": "Open Meta-Genomic Surveillance",
+    "object_type": "records",
     "version": "0.1.0",
     "fields": {
+        "is_published": {
+            "description": "Indicator for whether an object has been published.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "testadd"
+            ],
+            "default": true
+        },
+        "site": {
+            "description": "The site or sequencing centre providing the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "testadd"
+            ],
+            "values": [
+                "analysis"
+            ]
+        },
         "biosample_id": {
             "description": "The sequencing provider's identifier for a sample.",
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -19,7 +41,8 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -30,7 +53,8 @@
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 50"
@@ -41,10 +65,24 @@
             "type": "text",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd"
             ],
             "restrictions": [
                 "Max length: 100"
+            ]
+        },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "testadd"
+            ],
+            "values": [
+                "illumina",
+                "illumina.se",
+                "ont"
             ]
         },
         "input_type": {
@@ -52,7 +90,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "community_standard",
@@ -67,7 +108,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "asymptomatic",
@@ -82,7 +126,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "NIBSC_11/242",
@@ -102,7 +149,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "blood",
@@ -124,7 +174,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "aspirate",
@@ -140,7 +193,10 @@
             "type": "choice",
             "required": true,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "ERCC-RNA_4456740",
@@ -157,7 +213,10 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM, YYYY-MM-DD",
@@ -170,7 +229,10 @@
             "type": "date",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Input formats: YYYY-MM, YYYY-MM-DD",
@@ -183,7 +245,10 @@
             "type": "bool",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": false
         },
@@ -192,7 +257,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -203,7 +271,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -214,7 +285,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Max length: 100"
@@ -225,7 +299,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "clinical",
@@ -237,7 +314,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": "no_consent_for_research",
             "values": [
@@ -251,7 +331,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "AD",
@@ -514,7 +597,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "GB-ABC",
@@ -744,7 +830,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "library_protocol": {
@@ -752,7 +841,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "sequencing_protocol": {
@@ -760,7 +852,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "bioinformatics_protocol": {
@@ -768,7 +863,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "dehumanisation_protocol": {
@@ -776,7 +874,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         },
         "is_public_dataset": {
@@ -784,7 +885,10 @@
             "type": "bool",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": false
         },
@@ -793,7 +897,10 @@
             "type": "choice",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "values": [
                 "ENA",
@@ -805,7 +912,10 @@
             "type": "text",
             "required": false,
             "actions": [
-                "add"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ]
         }
     }
