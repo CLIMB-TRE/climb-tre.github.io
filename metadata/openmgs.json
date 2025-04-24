@@ -115,6 +115,7 @@
             ],
             "values": [
                 "asymptomatic",
+                "gastrointestinal_infection",
                 "respiratory_infection"
             ],
             "restrictions": [
