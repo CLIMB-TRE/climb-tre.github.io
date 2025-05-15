@@ -926,7 +926,9 @@
             "required": false,
             "actions": [
                 "add",
-                "change"
+                "testadd",
+                "change",
+                "testchange"
             ],
             "restrictions": [
                 "Max length: 12"
@@ -938,7 +940,9 @@
             "required": false,
             "actions": [
                 "add",
-                "change"
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": [],
             "restrictions": [
@@ -951,7 +955,9 @@
             "required": false,
             "actions": [
                 "add",
-                "change"
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": [],
             "restrictions": [
@@ -964,7 +970,9 @@
             "required": false,
             "actions": [
                 "add",
-                "change"
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": {}
         }
