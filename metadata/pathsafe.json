@@ -35,6 +35,7 @@
             "type": "text",
             "required": true,
             "actions": [
+                "identify",
                 "add",
                 "testadd"
             ],
@@ -47,6 +48,7 @@
             "type": "text",
             "required": false,
             "actions": [
+                "identify",
                 "add",
                 "testadd"
             ],
@@ -59,6 +61,7 @@
             "type": "text",
             "required": true,
             "actions": [
+                "identify",
                 "add",
                 "testadd"
             ],
@@ -71,6 +74,7 @@
             "type": "text",
             "required": true,
             "actions": [
+                "identify",
                 "add",
                 "testadd"
             ],
@@ -602,6 +606,21 @@
                 "testadd",
                 "change",
                 "testchange"
+            ]
+        },
+        "type_of_sample": {
+            "description": "Type of sample used to produce the sequence.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "add",
+                "testadd",
+                "change",
+                "testchange"
+            ],
+            "default": "genomic",
+            "values": [
+                "genomic"
             ]
         }
     }
