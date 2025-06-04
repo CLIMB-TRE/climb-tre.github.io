@@ -30,6 +30,19 @@
                 "UKHSA"
             ]
         },
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter"
+            ],
+            "restrictions": [
+                "Max length: 12"
+            ]
+        },
         "biosample_id": {
             "description": "The sequencing providers identifier for a sample.",
             "type": "text",
@@ -61,6 +74,9 @@
             "type": "text",
             "required": true,
             "actions": [
+                "get",
+                "list",
+                "filter",
                 "identify",
                 "add",
                 "testadd"
@@ -74,6 +90,9 @@
             "type": "text",
             "required": true,
             "actions": [
+                "get",
+                "list",
+                "filter",
                 "identify",
                 "add",
                 "testadd"
