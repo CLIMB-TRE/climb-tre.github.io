@@ -9,9 +9,23 @@
             "type": "bool",
             "required": false,
             "actions": [
+                "get",
+                "list",
+                "filter",
                 "testadd"
             ],
             "default": true
+        },
+        "is_suppressed": {
+            "description": "Indicator for whether an object has been hidden from users.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter"
+            ],
+            "default": false
         },
         "site": {
             "description": "Laboratory, organisation or agency the sample has been submitted by.",
@@ -28,6 +42,19 @@
                 "PHS",
                 "SSSCDRL",
                 "UKHSA"
+            ]
+        },
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter"
+            ],
+            "restrictions": [
+                "Max length: 12"
             ]
         },
         "biosample_id": {
@@ -61,6 +88,9 @@
             "type": "text",
             "required": true,
             "actions": [
+                "get",
+                "list",
+                "filter",
                 "identify",
                 "add",
                 "testadd"
@@ -74,6 +104,9 @@
             "type": "text",
             "required": true,
             "actions": [
+                "get",
+                "list",
+                "filter",
                 "identify",
                 "add",
                 "testadd"
