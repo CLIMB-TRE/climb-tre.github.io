@@ -1065,6 +1065,17 @@
                 "history"
             ]
         },
+        "total_bases": {
+            "description": "Total number of bases in the input FASTQ file(s), before any filtering.",
+            "type": "integer",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
         "classifier": {
             "description": "The classifier used.",
             "type": "choice",
@@ -1177,6 +1188,15 @@
                     "description": "The number of reads extracted for the taxa.",
                     "type": "integer",
                     "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "total_bases": {
+                    "description": "Total number of bases extracted for the taxa.",
+                    "type": "integer",
+                    "required": false,
                     "actions": [
                         "get",
                         "filter"
