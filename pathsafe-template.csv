@@ -1,0 +1,2 @@
+biosample_id,biosample_source_id,run_index,run_id,submitted_species,sample_accession,enterobase_barcode,collection_date,receipt_date,month,year,sequence_org,sequence_org_other,data_steward,data_steward_other,source_type,country,county,sample_purpose,sample_purpose_other,sequencing_kit,library_kit,is_multiplexed,type_of_sample
+
