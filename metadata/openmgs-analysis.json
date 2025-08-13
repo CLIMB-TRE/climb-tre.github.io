@@ -155,6 +155,7 @@
             "values": [
                 "NIBSC_11/242",
                 "NIBSC_20/170",
+                "bacillus_ms2phage",
                 "resp_matrix_mc110",
                 "water_extraction_control",
                 "zepto_rp2.1",
@@ -894,6 +895,21 @@
                 "list",
                 "filter",
                 "history"
+            ]
+        },
+        "protocol_arm": {
+            "description": "Used to indicate arm for protocols which have separate arms for bacterial and viral nucleic acids.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "bacterial",
+                "viral"
             ]
         },
         "bioinformatics_protocol": {
