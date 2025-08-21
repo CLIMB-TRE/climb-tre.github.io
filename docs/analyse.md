@@ -14,7 +14,7 @@ so that once installed, the Onyx client will automatically be configured.
 ## Onyx client basics
 
 First, let's install the Onyx client, which is available through the
-[conda-forge package](https://anaconda.org/conda-forge/climb-onyx-client) 
+[conda-forge package](https://anaconda.org/conda-forge/climb-onyx-client)
 `climb-onyx-client` and can thus be installed
 with `conda`.  As advised in the [CLIMB docs on installing
 software](https://docs.climb.ac.uk/notebook-servers/installing-software-with-conda/),
@@ -28,205 +28,236 @@ Let's activate this environment.
 jovyan:~$ conda activate onyx
 ```
 On Bryn's Notebook Servers, the client will automatically be configured.
-Try running the command-line client with
-```
-(onyx) jovyan:~$ onyx
-```
-This should show you some options and commands that are available.
-Have a look at your own profile with
-```
-(onyx) jovyan:~$ onyx profile
-```
-and which projects you have access to with
-```
-(onyx) jovyan:~$ onyx projects
-```
-You should see `mscape` listed.
+We will now have access to both the Python API and a command-line client.
+Let's walk through some of the commands available to us.
+In each case you can choose between the Python API or the command-line interface (CLI).
+
+### Initial setup
+
+=== "CLI"
+	No additional setup is required if you are running the CLI in a CLIMB
+	notebook. You can try running the command-line client with
+
+	```console
+	(onyx) jovyan:~$ onyx
+	```
+	to see some of the options and commands available to you.
+
+=== "Python"
+	If you are using onyx in Python, then you need to import the required modules and configure a client.
+	```python
+	import os
+	from onyx import OnyxConfig, OnyxEnv, OnyxClient
+
+	config = OnyxConfig(
+	    domain=os.environ[OnyxEnv.DOMAIN],
+	    token=os.environ[OnyxEnv.TOKEN],
+	)
+
+	client = OnyxClient(config=config)
+	```
+
+	!!! note
+
+	    In all the Python API examples, arguments will be
+		explicitly passed as keyword arguments e.g. `arg=value`,
+		however, in all cases shown on this page, the argument names 
+		can be omitted.
+
+### Profile
+
+You can view information about your profile (username, site, and email) with
+
+=== "CLI"
+
+	```console
+	(onyx) jovyan:~$ onyx profile
+	```
+
+=== "Python"
+
+	```python
+	client.profile()
+	```
+
+### Projects
+
+You can view the projects you have access to with
+
+=== "CLI"
+
+	```console
+	(onyx) jovyan:~$ onyx projects
+	```
+
+=== "Python"
+
+	```python
+	client.projects()
+	```
 
 ## Querying data
 
 As an example task, we'll see if we can find any sequencing data performed
-for ZymoBIOMICS sources.  These are designed with 
+for ZymoBIOMICS sources.  These are designed with
 [a particular specification](https://files.zymoresearch.com/protocols/_d6300_zymobiomics_microbial_community_standard.pdf)
-of DNA from eight bacteria and two yeasts.  We can use these to see if our protocol
-correctly recovers the DNA fractions. I.e. if our protocol is biased.
+of DNA from eight bacteria and two yeasts.
+We will search the `mscape` project, but bear in mind you may not
+have access to that particular project.
 
-From the command line, the main route to querying Onyx is via the `filter` command.
-On its own, this queries the database with *no* filters.  The command
-```
-(onyx) jovyan:~$ onyx filter mscape
-```
-will produce tens of thousands of lines of JSON, so let's not
-do that just yet.  To first see which fields are available in the database,
-we can use
-```
-(onyx) jovyan:~$ onyx fields mscape
-...
-├────────────────────────────────┼──────────┼───────────────────┼──────────────────────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┤
-│ extraction_enrichment_protocol │ optional │ text              │ Details of nucleic acid extraction and optional enrichment steps.            │                                                                             │
-├────────────────────────────────┼──────────┼───────────────────┼──────────────────────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────┤
-...
-```
-Let's search the database for entries with `zymo` (case-insensitive) in this field.
-```
-(onyx) jovyan:~$ onyx filter mscape --field extraction_enrichment_protocol.icontains=zymo
-...
-```
-That should return JSON data for a few entries.  You may wish to format the
-data as CSV or TSV with `--format csv` or `--format tsv`, respectively.
+To see every entry in the entire database for a particular project we can do
 
-## Inspecting some pipeline output on the command line
+=== "CLI"
 
-When data is ingested into Onyx, a taxonomic classification is automatically run.
-The last part of the JSON data is usually some of this, in JSON format.
-The complete reports can be found in the S3 buckets given in the
-`'taxon_report'` field.  You can find this in the output you've already produced
-or modify the `filter` command to only request them using the `--include` flag. e.g.
-```
-(onyx) jovyan:~$ onyx filter mscape --field extraction_enrichment_protocol.icontains=zymo --include=taxon_reports
-[
-    {
-        "taxon_reports": "s3://mscape-published-taxon-reports/C-FDE50853AD/"
-    },
-    {
-        "taxon_reports": "s3://mscape-published-taxon-reports/C-04F4495068/"
-    }
-]
-```
-Multiple fields can be requested with the `--include` flag e.g.
-```
-(onyx) jovyan:~$ onyx filter mscape --field extraction_enrichment_protocol.icontains=zymo --include climb_id,taxon_reports
-[
-    {
-        "climb_id": "C-FDE50853AD",
-        "taxon_reports": "s3://mscape-published-taxon-reports/C-FDE50853AD/"
-    },
-    {
-        "climb_id": "C-04F4495068",
-        "taxon_reports": "s3://mscape-published-taxon-reports/C-04F4495068/"
-    }
-]
-```
-You can conversely exclude individual fields using the `--exclude`
-flag in the same way.
+	```console
+	(onyx) jovyan:~$ onyx filter mscape
+	```
 
-Either way, you now have the location of the taxonomy reports.  Let's have a look
-with `s3cmd`.
-```
-(onyx) jovyan:~$ s3cmd ls s3://mscape-published-taxon-reports/C-FDE50853AD/
-2023-11-10 12:56   146K  s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken.json
-2023-11-10 12:56     2G  s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_assignments.tsv
-2023-11-10 12:56   193K  s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt
-```
-The plain text report is what we're after, so let's download that with `s3cmd`:
-```
-(onyx) jovyan:~$ s3cmd get s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt
-download: 's3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt' -> './PlusPF.kraken_report.txt'  [1 of 1]
- 197750 of 197750   100% in    0s     3.79 MB/s  done
-```
+=== "Python"
 
-If you've never seen one of these reports before, it's worth having a
-quick look with a tool like `less` or by opening it using the
-JupyterLab file browser.  For reference, it's worth showing the header
-```
-(onyx) jovyan:~$ head -n 1 PlusPF.kraken_report.txt
-% of Seqs       Clades  Taxonomies      Rank    Taxonomy ID     Scientific Name
-```
-The Zymo sample is prepared with 12% *Bacillus subtilis*.  Let's see how much
-was actually reported in the results:
-```
-(onyx) jovyan:~$ grep "Bacillus subtilis" PlusPF.kraken_report.txt
- 20.30  435278  1452    G1      653685                    Bacillus subtilis group
-  0.12  2624    1952    S       1423                        Bacillus subtilis
-  0.03  565     242     S1      135461                        Bacillus subtilis subsp. subtilis
-  0.01  108     108     S2      1404258                         Bacillus subtilis subsp. subtilis str. OH 131.1
-  ...
-```
-Looks like 20.3%, though classified under *Bacillus subtilis* "subgroup",
-rather than *Bacillus subtilis*, which reportedly only comprises 0.12% of the sample.
-Most of that 20.3% is under *Bacillus spizizenii*.
+	```python
+	# client.filter returns a generator that we can iterate over
+	entires = client.filter(project="mscape")
+	```
 
-An important detail here is that the fraction reported in this output
-is not calculated in the same way as what's used in the reference values (12% for bacteria; 2% for yeasts).
-Let's make a fairer comparison using the JSON taxonomic data.
+On its own, this command queries the database with *no* filters, and
+could return thousands of entries.
 
-## Working with database output in Python
+### Fields
 
-To fairly compare the taxonomic data with the reference values in the
-Zymo community, we need to know the proportions of gDNA, so we need to
-compute the number of base pairs that were assigned to each taxon.
-Let's make this comparison in Python using the Onyx client's Python
-API.
+We can see what fields exist in a particular database with
 
-Let's first run the same query for the Zymo data.  We'll follow the
-examples in the Onyx documentation and run the query in a context
-manager.
-```py
-import os
-from onyx import OnyxConfig, OnyxEnv, OnyxClient
+=== "CLI"
 
-config = OnyxConfig(
-    domain=os.environ[OnyxEnv.DOMAIN],
-    token=os.environ[OnyxEnv.TOKEN],
-)
+	```console
+	(onyx) jovyan:~$ onyx fields mscape
+	```
 
-with OnyxClient(config) as client:
-    records = list(client.filter(
-        "mscape",
-        fields={
-            "extraction_enrichment_protocol__icontains": "zymo",
-        },
-    ))
+=== "Python"
+
+	```python
+	client.fields(project="mscape")
+	```
+
+### Filtering
+
+We can filter the returned records to just select the entries in the
+database that we are interested in. For this example we'll see if we
+can find any sequencing data performed for ZymoBIOMICS sources.  These
+are designed with [a particular
+specification](https://files.zymoresearch.com/protocols/_d6300_zymobiomics_microbial_community_standard.pdf)
+of DNA from eight bacteria and two yeasts.
+
+To select these samples, we can ask that the `control_type_details`
+equals `zymo-mc_D6300`.
+
+=== "CLI"
+
+	```console
+	(onyx) jovyan:~$ onyx filter mscape --field control_type_details=zymo-mc_D6300
+	```
+
+=== "Python"
+
+	```python
+	# client.filter returns a generator that we can iterate over
+    entries = client.filter(project="mscape", fields={"control_type_details": "zymo-mc_D6300"})
+	```
+
+This returns a small number of entries that we can more easily work
+with. Note that this returns every field for each record that is
+found, which can be much more information than we need. We can select
+specific fields to include using e.g.
+
+=== "CLI"
+
+	```console
+	(onyx) jovyan:~$ onyx filter mscape --field control_type_details=zymo-mc_D6300 --include climb_id,biosample_id,taxon_reports
+	```
+
+=== "Python"
+
+	```python
+	query = {"control_type_details": "zymo-mc_D6300"}
+	fields_to_include = ["climb_id", "biosample_id" , "taxon_reports"]
+	# client.filter returns a generator that we can iterate over
+    entries = client.filter("mscape", fields=query, include=fields_to_include)
+	```
+
+### Taxonomic information
+
+By default, the filter command will not return taxonomic
+information. To access that information for an individual record use the `get` command.
+
+=== "CLI"
+
+	```console
+	(onyx) jovyan:~$ onyx get mscape <CLIMB_ID>
+	```
+
+=== "Python"
+
+	```python
+	record = client.get(project="mscape", climb_id=<CLIMB_ID>)
+	```
+where `<CLIMB_ID>` is replaced with the CLIMB ID of the record you
+want to retrieve.
+This will you give you all the information about a particular record
+including binned reads and all classifier calls.
+
+## Tips
+
+### `jq`
+
+If you are using the CLI, you may find [`jq`](https://jqlang.org)
+useful. `jq` can be installed into your conda environment
+
+```console
+(onyx) jovyan:~$ conda install jq
 ```
-We've wrapped the `filter` call in a `list` because otherwise
-we get a generator.
+You can then pipe the output of your onyx queries
+e.g. `onyx filter ...` into `jq` using the pipe operator `|`.
+This will colourise the output and may make reading the data easier.
+```console
+(onyx) jovyan:~$ onyx filter mscape --field control_type_details=zymo-mc_D6300 | jq
+```
+`jq` has many powerful features, including filtering, selecting, and formatting data.
 
-If you want to inspect the data, it's a bit easier to read if formatted with
-indentation, which can be done using the standard `json.dumps` function:
-```py
-import json
-print(json.dumps(records[0], indent=2))  # show first record
-```
-In each record, the `'taxa_files'` key gives us a list of dictionaries
-that each has a number of reads and a mean length, the product of
-which is the total number of base pairs that were read for that
-taxon.  A simple first step is to convert the taxonomic data (for the first record)
-into a Pandas DataFrame with
-```py
-import pandas as pd
 
-df = pd.DataFrame(records[0]['taxa_files'])
-```
-We also need to drop a few lower-level taxa that are already
-accounted for in higher ones. e.g. the reads for *Bacillus spizizenii TU-B-10* are
-among the reads counted for *Bacillus spizizenii*.  A quick way of doing this
-is by selecting the rows that have only two words in their names.
-```py
-df = df.loc[df['human_readable'].apply(lambda name: len(name.split()) == 2)]
-```
-Now, let's add columns for the total number of base pairs associated with
-each taxon and what proportion that is of the total.
-```py
-df['gDNA'] = df['n_reads']*df['mean_len']
-df['proportion'] = df['gDNA']/df['gDNA'].sum()
-```
-Finally, let's make a rough plot with a black dashed line at 12%.
-```py
-import matplotlib.pyplot as plt
+### Python context manager
 
-plt.plot(df['human_readable'], df['proportion']*100, 'o')
-plt.axhline(12, c='k', ls='--');
-plt.xticks(rotation=22.5, ha='right');
+If you are using the Python client, and performing more than one query to
+the onyx database in a single code block e.g. in a `for` loop. Then we
+recommend you use the `OnyxClient` as a context manager.
+
+```python
+# ...
+# Setup omitted
+# ...
+client = OnyxClient(config=config)
+
+# Perform several onyx operations in this block
+with client:
+	# Get the first entry in the database for the mscape project
+    first_entry = next(client.filter(project="mscape"))
+	
+	# Get the CLIMB ID of the entry
+    climb_id = first_entry["climb_id"]
+	
+	# Get the full record for this CLIMB ID using the `get` method
+    full_record = client.get(project="mscape", climb_id=climb_id)
+	
+	# Count the number of taxa_files
+    n_taxa_files = len(full_record["taxa_files"])
+    print(f"CLIMB_ID: {climb_id} has {n_taxa_files} taxa files")
 ```
 
-![Measured gDNA proportions of a Zymo community](./zymo-comparison.png)
+This is more efficient that not using the context manager as the
+client will re-use the same session for all requests, rather than
+creating a new session for each request. For more information, see:
+<https://requests.readthedocs.io/en/master/user/advanced/#session-objects`>
 
-There are some clear discrepancies—*Pseudomonas aeruginosa* is
-underreported and *Bacillus spizizenii* is overreported—but this
-matches results by e.g. [Nicholls et
-al. (2019)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6520541/).
+## Next steps
 
-This short example is intended as a basic demonstration of what's
-possible in CLIMB-TRE.  We're always interested to hear more examples
-of research questions that CLIMB-TRE can answer, so let us know if you
-have an example that could be included as a guide for others.
+Complete documentation of Onyx for both the CLI and Python API can be
+found [here](https://CLIMB-TRE.github.io/onyx-client/).
