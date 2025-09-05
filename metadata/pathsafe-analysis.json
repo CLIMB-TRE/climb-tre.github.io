@@ -186,6 +186,10 @@
                 "list",
                 "filter",
                 "history"
+            ],
+            "restrictions": [
+                "Min value: 1",
+                "Max value: 12"
             ]
         },
         "year": {
@@ -197,6 +201,9 @@
                 "list",
                 "filter",
                 "history"
+            ],
+            "restrictions": [
+                "Min value: 2000"
             ]
         },
         "sequence_org": {
