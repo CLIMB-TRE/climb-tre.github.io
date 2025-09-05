@@ -30,6 +30,7 @@ theme:
     # - navigation.top
     - toc.integrate
     - content.code.copy
+    - content.tabs.link
 
 plugins:
   - search
@@ -53,6 +54,7 @@ plugins:
       verbose: true
 
 markdown_extensions:
+  - admonition
   - attr_list
   - pymdownx.highlight:
       anchor_linenums: true
@@ -61,6 +63,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.magiclink
   - toc:
       permalink: true
