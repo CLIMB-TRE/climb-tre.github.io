@@ -203,6 +203,10 @@
                 "testadd",
                 "change",
                 "testchange"
+            ],
+            "restrictions": [
+                "Min value: 1",
+                "Max value: 12"
             ]
         },
         "year": {
@@ -214,6 +218,9 @@
                 "testadd",
                 "change",
                 "testchange"
+            ],
+            "restrictions": [
+                "Min value: 2000"
             ]
         },
         "sequence_org": {

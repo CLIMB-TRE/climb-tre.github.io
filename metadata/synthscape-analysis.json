@@ -1092,6 +1092,9 @@
                 "list",
                 "filter",
                 "history"
+            ],
+            "restrictions": [
+                "Min value: 0"
             ]
         },
         "classifier": {
@@ -1247,6 +1250,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "human_readable": {
@@ -1265,6 +1271,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "total_bases": {
@@ -1274,6 +1283,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "avg_quality": {
@@ -1283,6 +1295,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "mean_len": {
@@ -1292,6 +1307,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "rank": {
@@ -1352,6 +1370,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "human_readable": {
@@ -1370,6 +1391,10 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
                     ]
                 },
                 "count_descendants": {
@@ -1379,6 +1404,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "count_direct": {
@@ -1388,6 +1416,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "rank": {
@@ -1449,6 +1480,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 },
                 "human_readable": {
@@ -1476,6 +1510,9 @@
                     "actions": [
                         "get",
                         "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
                     ]
                 }
             }
