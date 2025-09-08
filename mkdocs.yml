@@ -34,9 +34,15 @@ theme:
 plugins:
   - search
   - git-revision-date-localized:
-      timezone: Europe/London
-      type: custom
-      custom_format: "Last modified %Y-%m-%d %X %z"
+      enable_creation_date: true
+      enable_last_modified_date: true
+      fallback_to_build_date: true
+      type: timeago
+      locale: en_GB
+      # type: datetime
+      # timezone: UTC
+      # locale: en
+      # date_format: '%Y-%m-%d %H:%M'
   - mkdocstrings:
       default_handler: python
       handlers:
