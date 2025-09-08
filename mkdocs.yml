@@ -25,17 +25,16 @@ theme:
 
   features:
     - navigation.tabs
-    - navigation.tabs.sticky
-    # - navigation.sections
-    # - navigation.top
-    - toc.integrate
+    - navigation.top
+    - navigation.sections
+    - navigation.footer
+    # - toc.integrate
     - content.code.copy
 
 plugins:
   - search
   - git-revision-date-localized:
       enable_creation_date: true
-      enable_last_modified_date: true
       fallback_to_build_date: true
       type: timeago
       locale: en_GB
@@ -54,9 +53,6 @@ plugins:
   - with-pdf:
       output_path: climb-tre.pdf
       cover_subtitle: ""
-      debug_html: true
-      show_anchors: true
-      verbose: true
 
 markdown_extensions:
   - attr_list
@@ -70,6 +66,9 @@ markdown_extensions:
   - pymdownx.magiclink
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Home: index.md
