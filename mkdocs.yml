@@ -81,17 +81,18 @@ nav:
     - Further Examples: mscape-examples.md
   - Project Specifications:
     - Common Structure: common.md
-    - PATH-SAFE:
-      - Uploader Specification: pathsafe.md
-      - Analysis Specification: pathsafe-analysis.md
-    - mSCAPE: 
+    - mSCAPE:
       - Uploader Specification: mscape.md
       - Analysis Specification: mscape-analysis.md
       - Changelog: mscape-changelog.md
+    - PATH-SAFE:
+      - Uploader Specification: pathsafe.md
+      - Analysis Specification: pathsafe-analysis.md
     - synthSCAPE:
       - Uploader Specification: synthscape.md
       - Analysis Specification: synthscape-analysis.md
     - openMGS:
       - Uploader Specification: openmgs.md
       - Analysis Specification: openmgs-analysis.md
-  - Onyx-client: https://CLIMB-TRE.github.io/onyx-client/
+  - Onyx Command-line & Python API: https://CLIMB-TRE.github.io/onyx-client/
+  - Onyx JupyterLab Extension: https://CLIMB-TRE.github.io/onyx-extension/
