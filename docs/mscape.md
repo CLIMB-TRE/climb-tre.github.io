@@ -73,4 +73,6 @@ mscape-[sequencing_org]-[platform]-[test_flag]
 
 ## Metadata specification
 
+### CSV Template
+
 A CSV template for uploaders can be downloaded here: [mscape-template.csv](mscape-template.csv){:download=mscape-template.csv}
