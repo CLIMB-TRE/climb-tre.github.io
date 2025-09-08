@@ -21,7 +21,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-Then, we can run the pages locally with:
+Then, we can start a local webserver to watch the pages as you edit them by running:
 
 ```
 $ mkdocs serve
