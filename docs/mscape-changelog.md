@@ -27,6 +27,12 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 
 ***
 
+## 2025-08-13
+### Onyx
+#### Added
+* Added `control_type_details` choice `bacillus_ms2phage`, constrained by an `input_type` of `positive_control`.
+* Added optional choice field `protocol_arm`, with choices `bacterial` and `viral`.
+
 ## 2025-08-05
 ### Onyx
 #### Added
