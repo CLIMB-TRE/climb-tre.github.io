@@ -9,9 +9,12 @@ logo: assets/dipi-patch.png
 logo_alt: CLIMB-TRE mSCAPE DIPI Mission Patch
 ---
 
+# mSCAPE Changelog
+
 All notable changes to CLIMB-TRE mSCAPE APIs, data or interchange formats that have impact to users or other pipelines should be documented in this file.
 Changes described here may only be a subset of all changes to a project as this log concerns itself only with changes that impact how data is provided or consumed by users or other pipelines.
-The following DIPI projects are routinely using this CHANGELOG.
+
+The following DIPI projects are routinely using this changelog:
 
 * `Scylla` -- ingest analysis pipeline
 * `Roz` -- ingest management
@@ -24,22 +27,22 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 
 ***
 
-# 2025-08-05
-## Onyx
-### Added
+## 2025-08-05
+### Onyx
+#### Added
 * Added `spike_in` option `bacillus_ms2phage`.
 
-# 2025-07-02
-## Onyx
-### Added
+## 2025-07-02
+### Onyx
+#### Added
 * Added `total_bases` field, for recording the number of bases in the input FASTQ file(s), before any filtering.
 * Added `taxa_files.total_bases` field, for recording the number of bases extracted for a taxa (assignable for each taxa within the `taxa_files` of a record).
 
-# 2025-05-08
-## Scylla
+## 2025-05-08
+### Scylla
 Released version 2.0.0. Given the number of changes, they are grouped by category rather than Added/Changed etc. 
 
-### HCID changes
+#### HCID changes
 * Add `min_coverage` parameter to HCID JSON
 * Update references in HCID JSON and reference file
 * Update thresholds for HCID detection
@@ -48,7 +51,7 @@ Released version 2.0.0. Given the number of changes, they are grouped by categor
 * Output read stats for HCID reads to the warning JSON (`mapped_mean_quality` and `mapped_mean_length`)
 * Add coverage information for HCID found showing how many bases have coverage at each level - in HCID JSON
 
-### Extract taxa changes
+#### Extract taxa changes
 * Reworked code to interact with kraken reports and assignment files during extract steps. Found a bug where some of the counts in the summary had previously been double counted (where both a S and S1 or S2 level taxa were extracted)
 * Extract reads at different levels for different domains as specified by config (`F` for Viruses, `G` for everything else)
 * Only extract reads at the specific level, not sublevels (e.g. S not S1 or S2)
@@ -56,7 +59,7 @@ Released version 2.0.0. Given the number of changes, they are grouped by categor
 * Make extraction percentages domain-specific (e.g. 1% of bacterial reads rather than 1% of classified reads) to fix zepto example
 * To extract a taxon, needs to pass count threshold OR the percentage threshold (previously both) and increase the count threshold for bacteria to 500
 
-### Workflow changes
+#### Workflow changes
 * Add workflow to reclassify the viral+unclassified fraction with a second database
 * In the process, the parameters associated with kraken databases have been restructured. Replace `--k2_host` with `--kraken_database.default.host`, `--k2_port` with `--kraken_database.default.port`, `--database` with `--kraken_database.default.path` and `database_set` is now `kraken_database.default.name`. This allows a second dictionary of kraken parameters for `kraken_database.virus` to be defined if/when necessary.
 * Add code to merge kraken assignment files, giving preference to second assignment file
@@ -66,18 +69,18 @@ Released version 2.0.0. Given the number of changes, they are grouped by categor
 * Add a workflow to run modules (use `--module <name>`) and remove workflow definitions from within these modules
 * Add a warning for incorrect Phred parsing as this is thought to be a resolved issue
 
-### Nextflow changes
+#### Nextflow changes
 * set `docker.userEmulation   = true`
 
-### Other changes
+#### Other changes
 * Add to README more helpful
 * Review all local test commands and make sure they run as expected.
 
-# 2025-03-31
-## Onyx
-### Added
+## 2025-03-31
+### Onyx
+#### Added
 * Added `nuth` (Newcastle upon Tyne Hospitals NHS Foundation Trust) as an option in the mSCAPE `site` field. 
 
-# 2025-03-06
-## All
+## 2025-03-06
+### All
 * Start of changelog
