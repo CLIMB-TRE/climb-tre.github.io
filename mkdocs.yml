@@ -72,25 +72,24 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Getting started:
-    - Uploading data: upload.md
-    - Analysing data: analyse.md
-    - Finding Submission Results: results.md
-    - Further Examples:
-      - Analysis examples for mSCAPE: mscape-examples.md
-  - Project specifications:
-    - Common structure: common.md
+  - Getting Started:
+    - How to Upload Data: upload.md
+    - Checking Submission Results: results.md
+    - Analysing Data: analyse.md
+    - Further Examples: mscape-examples.md
+  - Project Specifications:
+    - Common Structure: common.md
     - PATH-SAFE:
-      - Uploader specification: pathsafe.md
-      - Analysis specification: pathsafe-analysis.md
+      - Uploader Specification: pathsafe.md
+      - Analysis Specification: pathsafe-analysis.md
     - mSCAPE: 
-      - Uploader specification: mscape.md
-      - Analysis specification: mscape-analysis.md
-      - Infrastructure changes: mscape-changelog.md
+      - Uploader Specification: mscape.md
+      - Analysis Specification: mscape-analysis.md
+      - Changelog: mscape-changelog.md
     - synthSCAPE:
-      - Uploader specification: synthscape.md
-      - Analysis specification: synthscape-analysis.md
+      - Uploader Specification: synthscape.md
+      - Analysis Specification: synthscape-analysis.md
     - openMGS:
-      - Uploader specification: openmgs.md
-      - Analysis specification: openmgs-analysis.md
+      - Uploader Specification: openmgs.md
+      - Analysis Specification: openmgs-analysis.md
   - Onyx-client: https://CLIMB-TRE.github.io/onyx-client/
