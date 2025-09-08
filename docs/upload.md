@@ -50,7 +50,7 @@ $ bzcat DRR187559_1.fastqsanger.bz2 | gzip -c > DRR187559_1.fastq.gz
 $ bzcat DRR187559_2.fastqsanger.bz2 | gzip -c > DRR187559_2.fastq.gz
 ```
 
-The [mSCAPE specification](../mscape/) says that our files must have
+The [mSCAPE specification](./mscape.md) says that our files must have
 names like `mscape.[run_index].[run_id].[extension]`, where the
 extension is `1.fastq.gz` or `2.fastq.gz`.  The `run_index` and
 `run_id` can in principle contain any alphanumeric characters,
