@@ -1,0 +1,5 @@
+mkdocs-material
+mkdocstrings-python
+mkdocs-macros-plugin
+mkdocs-with-pdf
+mkdocs-git-revision-date-localized-plugin
