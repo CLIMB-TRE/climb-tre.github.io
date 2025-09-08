@@ -14,7 +14,7 @@ logo_alt: CLIMB-TRE mSCAPE DIPI Mission Patch
 All notable changes to CLIMB-TRE mSCAPE APIs, data or interchange formats that have impact to users or other pipelines should be documented in this file.
 Changes described here may only be a subset of all changes to a project as this log concerns itself only with changes that impact how data is provided or consumed by users or other pipelines.
 
-The following DIPI projects are routinely using this CHANGELOG:
+The following DIPI projects are routinely using this changelog:
 
 * `Scylla` -- ingest analysis pipeline
 * `Roz` -- ingest management
@@ -32,7 +32,7 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 #### Added
 * Added `spike_in` option `bacillus_ms2phage`.
 
-## 2025-07-02
+## 2025-07-02
 ### Onyx
 #### Added
 * Added `total_bases` field, for recording the number of bases in the input FASTQ file(s), before any filtering.
