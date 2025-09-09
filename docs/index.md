@@ -1,5 +1,7 @@
 # CLIMB-TRE
 
+## Introduction
+
 The CLIMB Trusted Research Environment (CLIMB-TRE) project provides tools
 with which users can upload metagenomics data, with metadata, and analyse
 them on [CLIMB](https://www.climb.ac.uk/).
