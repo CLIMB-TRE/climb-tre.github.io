@@ -4,7 +4,7 @@
 
 Once data and metadata have been ingested into the Onyx database, you
 can query it using the Onyx client, which provides a command line interface (CLI)
-and Python API.  This tutorial is intended as a basic demonstration of what is 
+and Python API. This tutorial is intended as a basic demonstration of what is
 possible. All capabilities of the Onyx client can be found in the
 [`onyx-client` documentation](https://climb-tre.github.io/onyx-client/).
 
@@ -61,7 +61,7 @@ In each case you can choose between the Python API or the command-line interface
 
         In all the Python API examples, arguments will be
         explicitly passed as keyword arguments e.g. `arg=value`,
-        however, in all cases shown on this page, the argument names 
+        however, in all cases shown on this page, the argument names
         can be omitted.
 
 ### Profile
@@ -122,6 +122,35 @@ To see every entry in the entire database for a particular project we can do
 
 On its own, this command queries the database with *no* filters, and
 could return thousands of entries.
+
+### Output formats
+
+The default behaviour of Onyx is to return data as JSON. If you prefer
+your data to be in a different format then that is possible.
+
+=== "CLI"
+
+    To get data in `csv` or `tsv` format, simply add the `--format <csv/tsv>`
+    option to your filter command. For example, to get the data in csv format
+    rather than JSON, you can do
+
+    ```console
+    (onyx) jovyan:~$ onyx filter mscape --format csv
+    ```
+
+=== "Python"
+
+    The Python client has [a method to write your data to a csv file](https://climb-tre.github.io/onyx-client/api/documentation/client/#onyx.OnyxClient.to_csv).
+    It can often be convenient to use a library like
+    [`pandas`](https://pandas.pydata.org) to perform analysis.
+    You can easily create a [`pandas.DataFrame`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) like so
+    ```python
+    import pandas as pd  # Install into conda environment first!
+    df = pd.DataFrame(client.filter(project="mscape"))
+    ```
+    You cnan then write your data to
+    [any of the output formats](https://pandas.pydata.org/docs/user_guide/io.html)
+    supported by `pandas`.
 
 ### Fields
 
@@ -198,7 +227,7 @@ Likewise, should we want to *exclude* certain fields, that is also possible
     query = {"control_type_details": "zymo-mc_D6300"}
     fields_to_exclude = ["batch_id", "study_id"]
     # client.filter returns a generator that we can iterate over
-    entries = client.filter("mscape", fields=query, exclude=fields_to_exclude)
+    entries = client.filter(project="mscape", fields=query, exclude=fields_to_exclude)
     ```
 
 ### Taxonomic information
@@ -243,7 +272,7 @@ reports are stored. These can then be directly downloaded for further analysis.
     }
     ]
     ```
-    where `CLIMB_ID_i` will be CLIMB ID of the sample. 
+    where `CLIMB_ID_i` will be CLIMB ID of the sample.
     These can be inspect and downloaded using either of the `s3cmd` or `aws s3` commands.
     For example
     ```console
@@ -260,7 +289,7 @@ reports are stored. These can then be directly downloaded for further analysis.
 === "Python"
 
     ```python
-    for i in client.filter("mscape", fields={"control_type_details": "zymo-mc_D6300"}, include=["taxon_reports"]):
+    for i in client.filter(project="mscape", fields={"control_type_details": "zymo-mc_D6300"}, include=["taxon_reports"]):
         print(i)
     ```
     will give something like
@@ -269,8 +298,8 @@ reports are stored. These can then be directly downloaded for further analysis.
     {'taxon_reports': 's3://mscape-published-taxon-reports/CLIMB_ID_2/'}
     {'taxon_reports': 's3://mscape-published-taxon-reports/CLIMB_ID_3/'}
     ```
-    Which can either be downloaded using the `s3cmd` or `aws s3` commands shown 
-    in the CLI tab of this block, or using a python library capable of reading 
+    Which can either be downloaded using the `s3cmd` or `aws s3` commands shown
+    in the CLI tab of this block, or using a python library capable of reading
     from s3, such as [`s3fs`](https://s3fs.readthedocs.io).
     ```python
     import s3fs  # Install into conda environment first!
@@ -329,13 +358,13 @@ client = OnyxClient(config=config)
 with client:
     # Get the first entry in the database for the mscape project
     first_entry = next(client.filter(project="mscape"))
-    
+
     # Get the CLIMB ID of the entry
     climb_id = first_entry["climb_id"]
-    
+
     # Get the full record for this CLIMB ID using the `get` method
     full_record = client.get(project="mscape", climb_id=climb_id)
-    
+
     # Count the number of taxa_files
     n_taxa_files = len(full_record["taxa_files"])
     print(f"CLIMB_ID: {climb_id} has {n_taxa_files} taxa files")
