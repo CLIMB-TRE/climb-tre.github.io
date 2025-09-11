@@ -349,6 +349,7 @@ the onyx database in a single code block e.g. in a `for` loop. Then we
 recommend you use the `OnyxClient` as a context manager.
 
 ```python
+from onyx.exceptions import OnyxHTTPError
 # ...
 # Setup omitted
 # ...
@@ -356,18 +357,26 @@ client = OnyxClient(config=config)
 
 # Perform several onyx operations in this block
 with client:
-    # Get the first entry in the database for the mscape project
-    first_entry = next(client.filter(project="mscape"))
+    try:
+        records = client.filter(
+            project="mscape",
+            fields={
+                "control_type_details": "zymo-mc_D6300",
+                "published_date__range": ["2025-01-01", "2025-05-01"],
+            },
+            include=["climb_id", "published_date", "taxon_reports"],
+        )
 
-    # Get the CLIMB ID of the entry
-    climb_id = first_entry["climb_id"]
+        for record in records:
+            climb_id = record["climb_id"]
 
-    # Get the full record for this CLIMB ID using the `get` method
-    full_record = client.get(project="mscape", climb_id=climb_id)
+            full_record = client.get(project="mscape", climb_id=climb_id)
 
-    # Count the number of taxa_files
-    n_taxa_files = len(full_record["taxa_files"])
-    print(f"CLIMB_ID: {climb_id} has {n_taxa_files} taxa files")
+            n_taxa_files = len(full_record["taxa_files"])
+            print(f"CLIMB_ID: {climb_id} has {n_taxa_files} taxa files entries")
+
+    except OnyxHTTPError as e:
+        print(e.response.json())
 ```
 
 This is more efficient that not using the context manager as the
