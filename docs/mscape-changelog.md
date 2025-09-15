@@ -27,6 +27,13 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 
 ***
 
+## 2025-09-15
+### Onyx
+#### Added
+* Added `ucl` (University College London) `site` option.
+* Added `ukhsamanc` (UKHSA Manchester Lab) `site` option.
+* Added `ukhsabris` (UKHSA Bristol Lab) `site` option.
+
 ## 2025-08-13
 ### Onyx
 #### Added
