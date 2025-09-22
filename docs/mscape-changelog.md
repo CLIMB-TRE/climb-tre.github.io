@@ -2,7 +2,7 @@
 layout: docpost
 title: mSCAPE DIPI Changelog
 date_published: 2025-03-06 11:30:00 +0000
-date_modified:  2025-05-08 13:12:00 +0000
+date_modified:  2025-09-22 13:12:00 +0000
 author: rmcolq
 maintainer: rmcolq
 logo: assets/dipi-patch.png
@@ -39,17 +39,38 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 #### Added
 * Added `control_type_details` choice `bacillus_ms2phage`, constrained by an `input_type` of `positive_control`.
 * Added optional choice field `protocol_arm`, with choices `bacterial` and `viral`.
+### Scylla
+Release 2.1.0
+#### Changed
+* Large speedup of all read extract scripts
+* Per read quality scores are now based on mean rather than median
+
+## 2025-08-05
+### Scylla
+Release 2.0.3
+#### Changed
+* Resolve missing total_length.json when no taxa files output
 
 ## 2025-08-05
 ### Onyx
 #### Added
 * Added `spike_in` option `bacillus_ms2phage`.
+### Scylla
+Release 2.0.2
+#### Added
+* Added `spike_in` option `bacillus_ms2phage`.
+#### Changed
+* Changed reference to --local flag in README/tests for local running to -profile local (can be combined with docker using -profile local,docker)
 
 ## 2025-07-02
 ### Onyx
 #### Added
 * Added `total_bases` field, for recording the number of bases in the input FASTQ file(s), before any filtering.
 * Added `taxa_files.total_bases` field, for recording the number of bases extracted for a taxa (assignable for each taxa within the `taxa_files` of a record).
+### Scylla
+Release 2.0.1
+#### Changed
+* Change the exitcode for script which checks paired fastq files so that the pipeline doesn't fail loudly with mismatched headers
 
 ## 2025-05-08
 ### Scylla
