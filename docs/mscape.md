@@ -2,18 +2,18 @@
 
 ## Files to be provided
 
-For *paired-end Illumina* sequencing data, suppliers must provide:
+For *paired-end Illumina* (`illumina`) sequencing data, suppliers must provide:
 
 * A FASTQ 1 file containing the forward sequencing reads.
 * A FASTQ 2 file containing the reverse sequencing reads.
 * A CSV file containing the metadata associated with sequencing the sample.
 
-For *single-end Illumina* sequencing data, suppliers must provide:
+For *single-end Illumina* (`illumina.se`) sequencing data, suppliers must provide:
 
 * A FASTQ file containing the sequencing reads.
 * A CSV file containing the metadata associated with sequencing the sample.
 
-For *ONT* sequencing data, suppliers must provide:
+For *ONT* (`ont`) sequencing data, suppliers must provide:
 
 * A FASTQ file containing the sequencing reads.
 * A CSV file containing the metadata associated with sequencing the sample.
@@ -54,6 +54,12 @@ For *ONT* sequencing data, the extensions (`[extension]`) should be:
 * `fastq.gz` for the forward FASTQ file.
 * `csv` for the CSV metadata file.
 
+## Platforms
+
+* For *paired-end Illumina* sequencing data, the (`[platform]`) should be `illumina`.
+* For *single-end Illumina* sequencing data, the (`[platform]`) should be `illumina.se`.
+* For *ONT* sequencing data, the (`[platform]`) should be `ont`.
+
 ## Valid characters
 
 The `[run_index]`, `[run_id]` and `[extension]` must contain only:
@@ -70,6 +76,8 @@ Bucket names follow the general convention:
 ```
 mscape-[sequencing_org]-[platform]-[test_flag]
 ```
+
+If you upload your data to an incorrect bucket, it will not be processed or in the worst case may be processed incorrectly, **it is your responsibility to ensure that your data is uploaded correctly!**
 
 ## Metadata specification
 
