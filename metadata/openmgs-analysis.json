@@ -1176,6 +1176,51 @@
                 "history"
             ]
         },
+        "chimera_bam": {
+            "description": "BAM file of the human filtered read fraction aligned to the zeus database.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "is_chimera_published": {
+            "description": "Whether chimera has been run on this record or not.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "alignment_db_version": {
+            "description": "Version of the Zeus database used.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "sylph_db_version": {
+            "description": "Sylph database version utilised to produce Sylph classifications.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
         "taxa_files": {
             "description": "Table of all species level taxa extracted.",
             "type": "relation",
@@ -1448,6 +1493,390 @@
                 },
                 "mapped_count": {
                     "description": "Number of reads which aligned to a reference sequence for the provided spike-in.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                }
+            }
+        },
+        "alignment_results": {
+            "description": "Table containing alignment results.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "Human readable scientific name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "unique_accession": {
+                    "description": "Unique reference identifier in the alignment database (everything prior to the first whitespace in the FASTA header).",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "accession_description": {
+                    "description": "The comment for the reference sequence within the alignment database.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "sequence_length": {
+                    "description": "Length of the reference sequence in the alignment database.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "evenness_value": {
+                    "description": "A percentage indicating how evenly read depths are distributed throughout the reference, with 0 being completely uneven, and 100 being perfectly even. Taken from https://academic.oup.com/nar/article/38/10/e116/2902812, under the \u201cCalculation of evenness score\u201d section, and calculated here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L102.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "mean_depth": {
+                    "description": "Mean of all depth values across the alignment reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "coverage_1x": {
+                    "description": "Percentage of the reference sequence covered with a depth of at least 1x.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "coverage_10x": {
+                    "description": "Percentage of the reference covered with a depth of at least 10x.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "mapped_reads": {
+                    "description": "Total number of reads mapped to the alignment reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "uniquely_mapped_reads": {
+                    "description": "Total number of reads which uniquely map to a reference and position within that reference (MAPQ >= 60).",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mapped_bases": {
+                    "description": "Approximation for the total number of bases mapped to the alignment reference, calculated from the length of the reference sequence multiplied by the mean depth of alignments to that reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_read_identity": {
+                    "description": "Mean of read identities across all alignments. Can be considered an approximation for identity of the source genome with the reference sequence. Calculated for each read here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L58",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "read_duplication_rate": {
+                    "description": "What proportion of the reads start and end in the same alignment reference position as at least one other read within the alignment. Calculated here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L76-L83",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "forward_proportion": {
+                    "description": "Proportion of reads which aligned to the forward strand. Between 0 and 1, with 0 indicating all reads aligned to the reverse strand, 1 the opposite. True hits should be close to 0.5 for this value for any reasonable mean depth.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
+                    ]
+                },
+                "mean_alignment_length": {
+                    "description": "Mean length of all alignments to the reference - different to mean read length aligned to the reference, since it only considers the aligned section of the reads.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                }
+            }
+        },
+        "sylph_results": {
+            "description": "Table containing sylph results.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "Human readable scientific name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_taxon_string": {
+                    "description": "Description of the taxonomic placement of the source contig within the Sylph database using GTDBs taxon string format.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_assembly_id": {
+                    "description": "Assembly ID (often genbank accession) for the contig within the sylph database, taken from GTDB.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_contig_header": {
+                    "description": "From the origin FASTA record header as it appears in GTDB. Identical to 'Contig_name' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "taxonomic_abundance": {
+                    "description": "Normalized taxonomic abundance as a percentage. Identical to 'Taxonomic_abundance' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "sequence_abundance": {
+                    "description": "Normalized sequence abundance as a percentage. Identical to 'Sequence_abundance' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "adjusted_ani": {
+                    "description": "If coverage adjustment is possible (cov is < 3x cov): returns coverage-adjusted ANI (Average Nucleotide Identity). If coverage is too low/high: returns naive_ani. Identical to 'Adjusted_ANI' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "ani_confidence_interval": {
+                    "description": "[5%,95%] confidence intervals. If coverage adjustment is possible: float-float e.g. 98.52-99.55. If coverage is too low/high: NA-NA is given. Identical to 'ANI_5-95_percentile' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "effective_coverage": {
+                    "description": "Estimated '\u03bbeff' value, true value is not calculated, this is estimated based on kmers. More information is available in the sylph paper: https://www.nature.com/articles/s41587-024-02412-y. If coverage adjustment is possible, lambda estimate is given. Identical to 'Eff_cov' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "effective_coverage_confidence_interval": {
+                    "description": "[5%, 95%] confidence intervals for lambda. Same format rules as 'ani_confidence_interval'. Identical to 'Lambda_5-95_percentile' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "median_kmer_cov": {
+                    "description": "Median k-mer multiplicity for k-mers with >= 1 multiplicity. Identical to 'Median_cov' field in sylph profile output.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_kmer_cov": {
+                    "description": "Mean k-mer multiplicity for k-mers with >= 1 multiplicity. Identical to 'Mean_cov_geq1' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "containment_index": {
+                    "description": "int/int showing the containment index (number of k-mers found in sample divided by total k-mers), e.g. 959/1053. Identical to 'Containment_ind' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "naive_ani": {
+                    "description": "Containment ANI without coverage adjustment. Identical to 'Naive_ANI' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "kmers_reassigned": {
+                    "description": "The number of k-mers reassigned away from the genome. Identical to 'Kmers_reassigned' field in sylph profile output.",
                     "type": "integer",
                     "required": true,
                     "actions": [
