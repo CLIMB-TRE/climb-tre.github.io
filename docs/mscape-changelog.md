@@ -27,6 +27,47 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 
 ***
 
+## 2025-10-17
+### Onyx
+#### Added
+##### Alignment Results
+* Added `alignment_results` table.
+* Added `alignment_results.taxon_id` field.
+* Added `alignment_results.human_readable` field.
+* Added `alignment_results.unique_accession` field.
+* Added `alignment_results.accession_description` field.
+* Added `alignment_results.sequence_length` field.
+* Added `alignment_results.evenness_value` field.
+* Added `alignment_results.mean_depth` field.
+* Added `alignment_results.coverage_1x` field.
+* Added `alignment_results.coverage10x` field.
+* Added `alignment_results.mapped_reads` field.
+* Added `alignment_results.uniquely_mapped_reads` field.
+* Added `alignment_results.mapped_bases` field.
+* Added `alignment_results.mean_read_identity` field.
+* Added `alignment_results.read_duplication_rate` field.
+* Added `alignment_results.forward_proportion` field.
+* Added `alignment_results.mean_alignment_length` field.
+
+##### Sylph Results
+* Added `sylph_results` table.
+* Added `sylph_results.taxon_id` field.
+* Added `sylph_results.human_readable` field.
+* Added `sylph_results.gtdb_taxon_string` field.
+* Added `sylph_results.gtdb_assembly_id` field.
+* Added `sylph_results.gtdb_contig_header` field.
+* Added `sylph_results.taxonomic_abundance` field.
+* Added `sylph_results.sequence_abundance` field.
+* Added `sylph_results.adjusted_ani` field.
+* Added `sylph_results.ani_confidence_interval` field.
+* Added `sylph_results.effective_coverage` field.
+* Added `sylph_results.effective_coverage_confidence_interval` field.
+* Added `sylph_results.median_kmer_cov` field.
+* Added `sylph_results.mean_kmer_cov` field.
+* Added `sylph_results.containment_index` field.
+* Added `sylph_results.naive_ani` field.
+* Added `sylph_results.kmers_reassigned` field.
+
 ## 2025-09-15
 ### Onyx
 #### Added
