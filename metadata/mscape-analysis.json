@@ -1642,7 +1642,7 @@
                     ]
                 },
                 "uniquely_mapped_reads": {
-                    "description": "Total number of reads which uniquely map to a reference and position within that reference (MAPQ >= 60).",
+                    "description": "Total number of reads which uniquely map to each reference sequence, calculated for each reference sequence here: https://github.com/CLIMB-TRE/chimera/blob/bca6fe6fe293f8e56d9e70627a846dda6f3d886a/bin/generate_alignment_report.py#L59-L82.",
                     "type": "integer",
                     "required": true,
                     "actions": [
