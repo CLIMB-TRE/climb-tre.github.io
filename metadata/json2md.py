@@ -3,51 +3,34 @@
 import csv
 import sys
 import json
-import copy
+from typing import Any
+from enum import Enum
 from argparse import ArgumentParser
 
-parser = ArgumentParser()
-command = parser.add_subparsers(dest="command", metavar="{command}", required=True)
-parser.add_argument("-t", "--title", type=str)
-parser.add_argument(
-    "-d", "--depth", type=int, default=1, help="header depth of title (default=1)"
-)
-uploader_parser = command.add_parser("uploader")
-uploader_parser.add_argument("json_filename", type=str)
 
-analysis_parser = command.add_parser("analysis")
-analysis_parser.add_argument("json_filename", type=str)
-
-template_parser = command.add_parser("template")
-template_parser.add_argument("json_filename", type=str)
-
-args = parser.parse_args()
+class Commands(Enum):
+    UPLOADER = "uploader"
+    ANALYSIS = "analysis"
+    TEMPLATE = "template"
 
 
-with open(args.json_filename, "r") as f:
-    j = json.load(f)
+def uploader_spec(fields: dict[str, Any], prefix="") -> tuple[list, dict, list]:
+    required = []
+    at_least_one_required = {}
+    optional = []
 
-
-def uploader_spec(
-    fields,
-    required,
-    optional,
-    at_least_one_required,
-    at_least_one_required_headers,
-    prefix="",
-):
-    for k, v in fields.items():
-        if "add" not in v["actions"]:
+    for field, info in fields.items():
+        if "add" not in info["actions"]:
             continue
 
         restrictions = []
         at_least_one_required_keys = []
 
-        if v.get("default") is not None:
-            restrictions.append("• Default: " + f"`{v['default']}`")
+        if info.get("default") is not None:
+            restrictions.append("• Default: " + f"`{info['default']}`")
 
-        if v.get("restrictions"):
-            for restriction in v["restrictions"]:
+        if info.get("restrictions"):
+            for restriction in info["restrictions"]:
                 condition, _, value = restriction.partition(": ")
 
                 if "at least one required" in condition.lower():
@@ -79,56 +62,53 @@ def uploader_spec(
                 else:
                     restrictions.append("• " + ": ".join([condition, f"`{value}`"]))
 
-        if v.get("values"):
-            if len(v["values"]) > 20:
+        if info.get("values"):
+            if len(info["values"]) > 20:
                 restrictions.append(
                     "• Choices: "
-                    + ", ".join([f"`{val}`" for val in v["values"][:20]])
+                    + ", ".join([f"`{val}`" for val in info["values"][:20]])
                     + ", ..."
                 )
             else:
                 restrictions.append(
-                    "• Choices: " + ", ".join([f"`{val}`" for val in v["values"]])
+                    "• Choices: " + ", ".join([f"`{val}`" for val in info["values"]])
                 )
 
         row = [
-            f"`{prefix}{k}`",
-            f"`{v['type']}`",
-            v["description"],
+            f"`{prefix}{field}`",
+            f"`{info['type']}`",
+            info["description"],
             "<br>".join(restrictions),
         ]
 
-        if v["required"]:
+        if info["required"]:
             required.append(row)
-
         elif at_least_one_required_keys:
             for key in at_least_one_required_keys:
-                at_least_one_required.setdefault(
-                    key, copy.deepcopy(at_least_one_required_headers)
-                ).append(row)
-
+                at_least_one_required.setdefault(key, []).append(row)
         else:
             optional.append(row)
 
-        if v["type"] == "relation":
-            uploader_spec(
-                v["fields"],
-                required,
-                optional,
-                at_least_one_required,
-                at_least_one_required_headers,
-                prefix=k + ".",
+        if info["type"] == "relation":
+            relation_required, relation_at_least_one_required, relation_optional = (
+                uploader_spec(info["fields"], prefix=field + ".")
             )
+            required.extend(relation_required)
+            for k, v in relation_at_least_one_required.items():
+                at_least_one_required.setdefault(k, []).extend(v)
+            optional.extend(relation_optional)
 
     return required, at_least_one_required, optional
 
 
-def analysis_spec(fields, spec, prefix=""):
-    for k, v in fields.items():
+def analysis_spec(fields, prefix="") -> list[str]:
+    spec = []
+
+    for field, info in fields.items():
         restrictions = []
 
-        if v.get("restrictions"):
-            for restriction in v["restrictions"]:
+        if info.get("restrictions"):
+            for restriction in info["restrictions"]:
                 condition, _, value = restriction.partition(": ")
                 if (
                     "output format" in condition.lower()
@@ -136,89 +116,130 @@ def analysis_spec(fields, spec, prefix=""):
                 ):
                     restrictions.append("• " + ": ".join([condition, f"`{value}`"]))
 
-        if v.get("values"):
-            if len(v["values"]) > 20:
+        if info.get("values"):
+            if len(info["values"]) > 20:
                 restrictions.append(
                     "• Choices: "
-                    + ", ".join([f"`{val}`" for val in v["values"][:20]])
+                    + ", ".join([f"`{val}`" for val in info["values"][:20]])
                     + ", ..."
                 )
             else:
                 restrictions.append(
-                    "• Choices: " + ", ".join([f"`{val}`" for val in v["values"]])
+                    "• Choices: " + ", ".join([f"`{val}`" for val in info["values"]])
                 )
 
         row = [
-            f"`{prefix}{k}`",
-            f"`{v['type']}`",
-            v["description"],
+            f"`{prefix}{field}`",
+            f"`{info['type']}`",
+            str(info["description"]) if info.get("description") else "",
             "<br>".join(restrictions),
         ]
 
         spec.append(row)
 
-        if v["type"] == "relation":
-            analysis_spec(v["fields"], spec, prefix=k + ".")
+        if info["type"] == "relation":
+            relation_spec = analysis_spec(info["fields"], prefix=field + ".")
+            spec.extend(relation_spec)
 
     return spec
 
 
-if args.title:
-    print("#" * args.depth + " " + args.title)
-    print()
+def generate_table(columns, rows):
+    table = [
+        columns,
+        ["-----"] * len(columns),
+    ] + rows
+    return "".join(["| " + " | ".join(row) + " |\n" for row in table])
 
 
-if args.command == "uploader":
-    required = [
-        [
-            "Field" + "&nbsp;" * 40,
-            "Data type",
-            "Description",
-            "Restrictions",
-        ],
-        ["-----"] * 4,
-    ]
-    optional = copy.deepcopy(required)
-    at_least_one_required = {}
-    at_least_one_required_headers = copy.deepcopy(required)
-
-    uploader_spec(
-        j["fields"],
-        required,
-        optional,
-        at_least_one_required,
-        at_least_one_required_headers,
+def main():
+    parser = ArgumentParser()
+    command = parser.add_subparsers(dest="command", required=True)
+    parser.add_argument(
+        "-t",
+        "--title",
+        type=str,
+    )
+    parser.add_argument(
+        "-d",
+        "--depth",
+        type=int,
+        default=1,
+        help="header depth of title (default=1)",
+    )
+    uploader_parser = command.add_parser(
+        Commands.UPLOADER.value,
+        help="Generate uploader field documentation in Markdown format",
+    )
+    uploader_parser.add_argument(
+        "json_filename",
+        type=str,
+    )
+    analysis_parser = command.add_parser(
+        Commands.ANALYSIS.value,
+        help="Generate analysis field documentation in Markdown format",
+    )
+    analysis_parser.add_argument(
+        "json_filename",
+        type=str,
+    )
+    template_parser = command.add_parser(
+        Commands.TEMPLATE.value,
+        help="Generate a CSV template for the uploader",
+    )
+    template_parser.add_argument(
+        "json_filename",
+        type=str,
     )
 
-    print("#" * args.depth + "# Required fields\n")
-    print("".join(["| " + " | ".join(row) + " |\n" for row in required]))
+    args = parser.parse_args()
 
-    for x, table in at_least_one_required.items():
-        print("At least one of the following fields are required:\n")
-        print("".join(["| " + " | ".join(row) + " |\n" for row in table]))
+    with open(args.json_filename, "r") as f:
+        j = json.load(f)
 
-    print("#" * args.depth + "# Optional fields\n")
-    print("".join(["| " + " | ".join(row) + " |\n" for row in optional]))
+    if args.title:
+        print("#" * args.depth + " " + args.title)
+        print()
 
-elif args.command == "analysis":
-    spec = [
-        [
+    if args.command == Commands.UPLOADER.value:
+        columns = [
             "Field" + "&nbsp;" * 40,
             "Data type",
             "Description",
             "Restrictions",
-        ],
-        ["-----"] * 4,
-    ]
-    analysis_spec(j["fields"], spec)
+        ]
 
-    print("#" * args.depth + "# Analysis fields\n")
-    print("".join(["| " + " | ".join(row) + " |\n" for row in spec]))
+        required, at_least_one_required, optional = uploader_spec(j["fields"])
 
-elif args.command == "template":
-    template_fields = [
-        field for field in j["fields"] if "add" in j["fields"][field]["actions"]
-    ]
-    writer = csv.writer(sys.stdout)
-    writer.writerow(template_fields)
-    writer.writerow([])
+        print("#" * args.depth + "# Required fields\n")
+        print(generate_table(columns=columns, rows=required))
+
+        for _, table in at_least_one_required.items():
+            print("At least one of the following fields are required:\n")
+            print(generate_table(columns=columns, rows=table))
+
+        print("#" * args.depth + "# Optional fields\n")
+        print(generate_table(columns=columns, rows=optional))
+
+    elif args.command == Commands.ANALYSIS.value:
+        columns = [
+            "Field" + "&nbsp;" * 40,
+            "Data type",
+            "Description",
+            "Restrictions",
+        ]
+        spec = analysis_spec(j["fields"])
+        print("#" * args.depth + "# Analysis fields\n")
+        print(generate_table(columns=columns, rows=spec))
+
+    elif args.command == Commands.TEMPLATE.value:
+        template_fields = [
+            field for field in j["fields"] if "add" in j["fields"][field]["actions"]
+        ]
+        writer = csv.writer(sys.stdout)
+        writer.writerow(template_fields)
+        writer.writerow([])
+
+
+if __name__ == "__main__":
+    main()
