@@ -1234,7 +1234,7 @@
             ]
         },
         "taxa_files": {
-            "description": "Table of all species level taxa extracted.",
+            "description": "Table of all species level taxa extracted by the Scylla ingest pipeline.",
             "type": "relation",
             "required": false,
             "actions": [
@@ -1354,7 +1354,7 @@
             }
         },
         "classifier_calls": {
-            "description": "Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier.",
+            "description": "Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier during the Scylla ingest pipeline.",
             "type": "relation",
             "required": false,
             "actions": [
@@ -1464,7 +1464,7 @@
             }
         },
         "spike_in_info": {
-            "description": "Table containing taxonomic results found for the provided spike-in.",
+            "description": "Table containing results found for the provided spike-in.",
             "type": "relation",
             "required": false,
             "actions": [
@@ -1518,7 +1518,7 @@
             }
         },
         "alignment_results": {
-            "description": "Table containing alignment results.",
+            "description": "Table containing alignment results from the viral alignment stage of the CLIMB-TRE/chimera pipeline.",
             "type": "relation",
             "required": false,
             "actions": [
@@ -1717,7 +1717,7 @@
             }
         },
         "sylph_results": {
-            "description": "Table containing sylph results.",
+            "description": "Table containing sylph results from the Sylph classification stage of the CLIMB-TRE/chimera pipeline.",
             "type": "relation",
             "required": false,
             "actions": [
