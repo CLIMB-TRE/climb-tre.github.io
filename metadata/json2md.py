@@ -14,7 +14,9 @@ class Commands(Enum):
     TEMPLATE = "template"
 
 
-def uploader_spec(fields: dict[str, Any], prefix="") -> tuple[list, dict, list]:
+def uploader_spec(
+    fields: dict[str, Any], prefix: str = ""
+) -> tuple[list[list[str]], dict[str, list[list[str]]], list[list[str]]]:
     required = []
     at_least_one_required = {}
     optional = []
@@ -101,7 +103,7 @@ def uploader_spec(fields: dict[str, Any], prefix="") -> tuple[list, dict, list]:
     return required, at_least_one_required, optional
 
 
-def analysis_spec(fields, prefix="") -> list[str]:
+def analysis_spec(fields: dict[str, Any], prefix: str = "") -> list[list[str]]:
     spec = []
 
     for field, info in fields.items():
@@ -144,7 +146,7 @@ def analysis_spec(fields, prefix="") -> list[str]:
     return spec
 
 
-def generate_table(columns, rows):
+def generate_table(columns: list[str], rows: list[list[str]]) -> str:
     table = [
         columns,
         ["-----"] * len(columns),
