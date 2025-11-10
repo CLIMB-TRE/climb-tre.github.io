@@ -182,12 +182,13 @@ def generate_tables(columns: list[str], rows: list[list[str]], depth: int = 1) -
     markdown += f"{'#' * depth}# Fields\n\n"
     markdown += generate_table(columns=columns, rows=fields) + "\n\n"
 
-    markdown += f"{'#' * depth}# Relations\n\n"
-    for relation, relation_fields in relation_fields.items():
-        markdown += f"{'#' * depth}## `{relation}`\n\n"
-        markdown += relations[relation][2] + "\n\n"
+    if relations:
+        markdown += f"{'#' * depth}# Relations\n\n"
+        for relation, relation_fields in relation_fields.items():
+            markdown += f"{'#' * depth}## `{relation}`\n\n"
+            markdown += relations[relation][2] + "\n\n"
 
-        markdown += generate_table(columns=columns, rows=relation_fields) + "\n\n"
+            markdown += generate_table(columns=columns, rows=relation_fields) + "\n\n"
 
     return markdown
 
