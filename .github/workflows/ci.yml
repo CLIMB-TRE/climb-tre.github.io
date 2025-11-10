@@ -12,32 +12,39 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
+      
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      
       - uses: actions/cache@v3
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: |
+      
+      - name: Generate Specifications and Templates
+        run: |
           # Uploader specifications
-          python3 metadata/json2md.py -d 2 uploader metadata/mscape.json >> docs/mscape.md
-          python3 metadata/json2md.py -d 2 uploader metadata/synthscape.json >> docs/synthscape.md
-          python3 metadata/json2md.py -d 2 uploader metadata/openmgs.json >> docs/openmgs.md
-          python3 metadata/json2md.py -d 2 uploader metadata/pathsafe.json  >> docs/pathsafe.md
+          python3 metadata/json2md.py --depth 2 uploader metadata/mscape.json >> docs/mscape.md
+          python3 metadata/json2md.py --depth 2 uploader metadata/synthscape.json >> docs/synthscape.md
+          python3 metadata/json2md.py --depth 2 uploader metadata/openmgs.json >> docs/openmgs.md
+          python3 metadata/json2md.py --depth 2 uploader metadata/pathsafe.json  >> docs/pathsafe.md
           # Analysis specifications
-          python3 metadata/json2md.py -d 2 analysis metadata/mscape-analysis.json >> docs/mscape-analysis.md
-          python3 metadata/json2md.py -d 2 analysis metadata/synthscape-analysis.json >> docs/synthscape-analysis.md
-          python3 metadata/json2md.py -d 2 analysis metadata/openmgs-analysis.json >> docs/openmgs-analysis.md
-          python3 metadata/json2md.py -d 2 analysis metadata/pathsafe-analysis.json  >> docs/pathsafe-analysis.md
+          python3 metadata/json2md.py --depth 1 analysis metadata/mscape-analysis.json >> docs/mscape-analysis.md
+          python3 metadata/json2md.py --depth 1 analysis metadata/synthscape-analysis.json >> docs/synthscape-analysis.md
+          python3 metadata/json2md.py --depth 1 analysis metadata/openmgs-analysis.json >> docs/openmgs-analysis.md
+          python3 metadata/json2md.py --depth 1 analysis metadata/pathsafe-analysis.json  >> docs/pathsafe-analysis.md
           # Template CSVs
-          python3 metadata/json2md.py -d 2 template metadata/mscape.json > docs/mscape-template.csv
-          python3 metadata/json2md.py -d 2 template metadata/synthscape.json > docs/synthscape-template.csv
-          python3 metadata/json2md.py -d 2 template metadata/openmgs.json > docs/openmgs-template.csv
-          python3 metadata/json2md.py -d 2 template metadata/pathsafe.json > docs/pathsafe-template.csv
+          python3 metadata/json2md.py template metadata/mscape.json > docs/mscape-template.csv
+          python3 metadata/json2md.py template metadata/synthscape.json > docs/synthscape-template.csv
+          python3 metadata/json2md.py template metadata/openmgs.json > docs/openmgs-template.csv
+          python3 metadata/json2md.py template metadata/pathsafe.json > docs/pathsafe-template.csv
           # Website dependencies
           pip install -r requirements.txt
-      - run: mkdocs gh-deploy --force
+      
+      - name: Deploy Website
+        run: mkdocs gh-deploy --force
