@@ -726,11 +726,71 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#analysis-fields" class="md-nav__link">
+  <a href="#fields" class="md-nav__link">
     <span class="md-ellipsis">
-      Analysis fields
+      Fields
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#taxa_files" class="md-nav__link">
+    <span class="md-ellipsis">
+      taxa_files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classifier_calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      classifier_calls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_in_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      spike_in_info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment_results" class="md-nav__link">
+    <span class="md-ellipsis">
+      alignment_results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sylph_results" class="md-nav__link">
+    <span class="md-ellipsis">
+      sylph_results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1152,11 +1212,71 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#analysis-fields" class="md-nav__link">
+  <a href="#fields" class="md-nav__link">
     <span class="md-ellipsis">
-      Analysis fields
+      Fields
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#taxa_files" class="md-nav__link">
+    <span class="md-ellipsis">
+      taxa_files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classifier_calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      classifier_calls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_in_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      spike_in_info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment_results" class="md-nav__link">
+    <span class="md-ellipsis">
+      alignment_results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sylph_results" class="md-nav__link">
+    <span class="md-ellipsis">
+      sylph_results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1180,7 +1300,7 @@
 
 
 <h1 id="mscape-analysis-specification">mSCAPE Analysis Specification<a class="headerlink" href="#mscape-analysis-specification" title="Permanent link">&para;</a></h1>
-<h3 id="analysis-fields">Analysis fields<a class="headerlink" href="#analysis-fields" title="Permanent link">&para;</a></h3>
+<h3 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1515,12 +1635,21 @@
 <td>Sylph database version utilised to produce Sylph classifications.</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<h3 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">&para;</a></h3>
+<h4 id="taxa_files"><code>taxa_files</code><a class="headerlink" href="#taxa_files" title="Permanent link">&para;</a></h4>
+<p>Table of all species level taxa extracted by the Scylla ingest pipeline.</p>
+<table>
+<thead>
 <tr>
-<td><code>taxa_files</code></td>
-<td><code>relation</code></td>
-<td>Table of all species level taxa extracted by the Scylla ingest pipeline.</td>
-<td></td>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><code>taxa_files.taxon_id</code></td>
 <td><code>integer</code></td>
@@ -1575,12 +1704,20 @@
 <td>Compressed FASTQ of extracted reads for the taxa.</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<h4 id="classifier_calls"><code>classifier_calls</code><a class="headerlink" href="#classifier_calls" title="Permanent link">&para;</a></h4>
+<p>Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier during the Scylla ingest pipeline.</p>
+<table>
+<thead>
 <tr>
-<td><code>classifier_calls</code></td>
-<td><code>relation</code></td>
-<td>Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier during the Scylla ingest pipeline.</td>
-<td></td>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><code>classifier_calls.taxon_id</code></td>
 <td><code>integer</code></td>
@@ -1629,12 +1766,20 @@
 <td>The taxa is a spike-in.</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<h4 id="spike_in_info"><code>spike_in_info</code><a class="headerlink" href="#spike_in_info" title="Permanent link">&para;</a></h4>
+<p>Table containing results found for the provided spike-in.</p>
+<table>
+<thead>
 <tr>
-<td><code>spike_in_info</code></td>
-<td><code>relation</code></td>
-<td>Table containing results found for the provided spike-in.</td>
-<td></td>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><code>spike_in_info.taxon_id</code></td>
 <td><code>integer</code></td>
@@ -1659,12 +1804,20 @@
 <td>Number of reads which aligned to a reference sequence for the provided spike-in.</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<h4 id="alignment_results"><code>alignment_results</code><a class="headerlink" href="#alignment_results" title="Permanent link">&para;</a></h4>
+<p>Table containing alignment results from the viral alignment stage of the CLIMB-TRE/chimera pipeline.</p>
+<table>
+<thead>
 <tr>
-<td><code>alignment_results</code></td>
-<td><code>relation</code></td>
-<td>Table containing alignment results from the viral alignment stage of the CLIMB-TRE/chimera pipeline.</td>
-<td></td>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><code>alignment_results.taxon_id</code></td>
 <td><code>integer</code></td>
@@ -1761,12 +1914,20 @@
 <td>Mean length of all alignments to the reference - different to mean read length aligned to the reference, since it only considers the aligned section of the reads.</td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<h4 id="sylph_results"><code>sylph_results</code><a class="headerlink" href="#sylph_results" title="Permanent link">&para;</a></h4>
+<p>Table containing sylph results from the Sylph classification stage of the CLIMB-TRE/chimera pipeline.</p>
+<table>
+<thead>
 <tr>
-<td><code>sylph_results</code></td>
-<td><code>relation</code></td>
-<td>Table containing sylph results from the Sylph classification stage of the CLIMB-TRE/chimera pipeline.</td>
-<td></td>
+<th>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>Data type</th>
+<th>Description</th>
+<th>Restrictions</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><code>sylph_results.taxon_id</code></td>
 <td><code>integer</code></td>
