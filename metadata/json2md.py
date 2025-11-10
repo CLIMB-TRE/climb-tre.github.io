@@ -154,6 +154,91 @@ def generate_table(columns: list[str], rows: list[list[str]]) -> str:
     return "".join(["| " + " | ".join(row) + " |\n" for row in table])
 
 
+def generate_tables(columns: list[str], rows: list[list[str]], depth: int = 1) -> str:
+    markdown = ""
+
+    fields = []
+    relations = {}
+    relation_fields = {}
+
+    # Identify relations
+    for row in rows:
+        if row[1] == "`relation`":
+            relations[row[0].strip("`")] = row
+            relation_fields[row[0].strip("`")] = []
+
+    # Group fields under their relations
+    for row in rows:
+        for relation in relations:
+            if row[0].startswith(f"`{relation}."):
+                relation_fields[relation].append(row)
+                break
+            elif row[0] == f"`{relation}`":
+                # Skip the relation itself
+                break
+        else:
+            fields.append(row)
+
+    markdown += f"{'#' * depth}# Fields\n\n"
+    markdown += generate_table(columns=columns, rows=fields) + "\n\n"
+
+    markdown += f"{'#' * depth}# Relations\n\n"
+    for relation, relation_fields in relation_fields.items():
+        markdown += f"{'#' * depth}## `{relation}`\n\n"
+        markdown += relations[relation][2] + "\n\n"
+
+        markdown += generate_table(columns=columns, rows=relation_fields) + "\n\n"
+
+    return markdown
+
+
+def generate_section(row: list[str], depth: int = 1) -> str:
+    lines = [f"{'#' * (depth)}# {row[0]}", row[2], f"**Type:** {row[1]}"]
+
+    if row[3].strip():
+        lines.extend(["**Restrictions:**", row[3]])
+
+    return "\n\n".join(lines) + "\n\n"
+
+
+def generate_sections(rows: list[list[str]], depth: int = 1) -> str:
+    markdown = ""
+
+    fields = []
+    relations = {}
+    relation_fields = {}
+
+    # Identify relations
+    for row in rows:
+        if row[1] == "`relation`":
+            relations[row[0].strip("`")] = row
+            relation_fields[row[0].strip("`")] = []
+
+    # Group fields under their relations
+    for row in rows:
+        for relation in relations:
+            if row[0].startswith(f"`{relation}."):
+                relation_fields[relation].append(row)
+                break
+            elif row[0] == f"`{relation}`":
+                # Skip the relation itself
+                break
+        else:
+            fields.append(row)
+
+    for row in fields:
+        markdown += generate_section(row, depth=depth)
+
+    for relation, relation_fields in relation_fields.items():
+        markdown += f"{'#' * depth}# `{relation}`\n\n"
+        markdown += relations[relation][2] + "\n\n"
+
+        for row in relation_fields:
+            markdown += generate_section(row, depth=depth + 1)
+
+    return markdown
+
+
 def main():
     parser = ArgumentParser()
     command = parser.add_subparsers(dest="command", required=True)
@@ -231,8 +316,7 @@ def main():
             "Restrictions",
         ]
         spec = analysis_spec(j["fields"])
-        print("#" * args.depth + "# Analysis fields\n")
-        print(generate_table(columns=columns, rows=spec))
+        print(generate_tables(columns=columns, rows=spec, depth=args.depth))
 
     elif args.command == Commands.TEMPLATE.value:
         template_fields = [
