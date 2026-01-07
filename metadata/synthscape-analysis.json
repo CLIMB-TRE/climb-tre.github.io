@@ -1747,6 +1747,18 @@
                         "Max value: 1"
                     ]
                 },
+                "mean_read_length": {
+                    "description": "Mean read length (inferred from CIGAR string) of all reads aligned to the reference sequence in question.",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
                 "mean_alignment_length": {
                     "description": "Mean length of all alignments to the reference - different to mean read length aligned to the reference, since it only considers the aligned section of the reads.",
                     "type": "decimal",
@@ -1757,6 +1769,19 @@
                     ],
                     "restrictions": [
                         "Min value: 0"
+                    ]
+                },
+                "mean_alignment_proportion": {
+                    "description": "Mean of the proportion of each read which makes up the alignment to the reference (functionally mean_alignment_length / mean_read_length)",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
                     ]
                 }
             }
