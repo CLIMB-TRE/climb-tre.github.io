@@ -2084,9 +2084,21 @@
 <td></td>
 </tr>
 <tr>
+<td><code>alignment_results.mean_read_length</code></td>
+<td><code>decimal</code></td>
+<td>Mean read length (inferred from CIGAR string) of all reads aligned to the reference sequence in question.</td>
+<td></td>
+</tr>
+<tr>
 <td><code>alignment_results.mean_alignment_length</code></td>
 <td><code>decimal</code></td>
 <td>Mean length of all alignments to the reference - different to mean read length aligned to the reference, since it only considers the aligned section of the reads.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>alignment_results.mean_alignment_proportion</code></td>
+<td><code>decimal</code></td>
+<td>Mean of the proportion of each read which makes up the alignment to the reference (functionally mean_alignment_length / mean_read_length)</td>
 <td></td>
 </tr>
 </tbody>
