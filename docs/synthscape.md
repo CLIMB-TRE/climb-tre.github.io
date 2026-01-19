@@ -36,6 +36,8 @@ where:
 - `[run_id]` is the name of the sequencing run as given by the supplier's sequencing instrument (not an internal identifier assigned by the supplier).
 - `[extension]` is the file extension indicating the file type.
 
+**ALL** files must be uploaded to the root of the bucket, meaning that subdirectories cannot be used. Any file inside of a subdirectory of a bucket **will** be ignored.
+
 ## File name extensions
 
 For _paired-end Illumina_ sequencing data, the extensions (`[extension]`) should be:
