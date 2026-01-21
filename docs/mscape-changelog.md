@@ -27,6 +27,23 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 
 ***
 
+## 2026-01-19
+### Onyx
+#### Added
+* Added `barts` (Barts Health NHS Trust) `site` option.
+
+## 2026-01-07
+### Onyx
+#### Added
+* Added `alignment_results.mean_read_length` field.
+* Added `alignment_results.mean_alignment_proportion` field.
+
+## 2025-10-20
+### Onyx
+#### Changed
+* Changed `alignment_results` unique identifier from `taxon_id` to `unique_accession`.
+* Changed `sylph_results` unique identifier from `taxon_id` to `gtdb_assembly_id`.
+
 ## 2025-10-17
 ### Onyx
 #### Added
