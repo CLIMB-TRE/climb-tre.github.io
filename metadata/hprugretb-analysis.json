@@ -1,1 +1,172 @@
-{}
+{
+    "name": "HPRU GRE TB",
+    "description": "HPRU Genomics Research Environment TB Data",
+    "object_type": "records",
+    "version": "0.1.0",
+    "fields": {
+        "published_date": {
+            "description": "The date the object was published in Onyx.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "site": {
+            "description": "The site providing the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "ukhsahprugenomics"
+            ]
+        },
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 12"
+            ]
+        },
+        "run_index": {
+            "description": "The sequencing provider's identifier for the position of a sample on a run.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "run_id": {
+            "description": "Unique identifier assigned to the run by the sequencing instrument.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "no_platform"
+            ]
+        },
+        "guuid": {
+            "description": "Sample ID assigned by Labkey.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "organism": {
+            "description": "The identified organism.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "plate_name": {
+            "description": "Name of the sequencing plate assigned by the laboratory scientist.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "creation_date": {
+            "description": "Date the sequencing associated record was created in the Labkey database.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "fasta_uri": {
+            "description": "URI to the FASTA file in object storage.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "vcf_uri": {
+            "description": "URI to the VCF file in object storage.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        }
+    }
+}
