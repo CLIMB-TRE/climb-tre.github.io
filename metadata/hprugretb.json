@@ -12,7 +12,10 @@
                 "get",
                 "list",
                 "filter",
-                "testadd"
+                "add",
+                "testadd",
+                "change",
+                "testchange"
             ],
             "default": true
         },
@@ -86,6 +89,7 @@
             "type": "choice",
             "required": true,
             "actions": [
+                "add",
                 "testadd"
             ],
             "values": [
