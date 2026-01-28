@@ -14,7 +14,7 @@ Suppliers must provide:
 The base filenames should be of the form
 
 ```
-mscape.[run_index].[run_id].[extension]
+hprugretb.[run_index].[run_id].[extension]
 ```
 
 where:
@@ -51,7 +51,7 @@ The `[run_index]`, `[run_id]` and `[extension]` must contain only:
 Bucket names follow the general convention:
 
 ```
-mscape-[sequencing_org]-noplatform-[test_flag]
+hprugretb-[sequencing_org]-noplatform-[test_flag]
 ```
 
 If you upload your data to an incorrect bucket, it will not be processed or in the worst case may be processed incorrectly, **it is your responsibility to ensure that your data is uploaded correctly!**
