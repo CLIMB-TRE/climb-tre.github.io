@@ -4,7 +4,7 @@
 
 Suppliers must provide:
 
-* A VCF file containing the variant calls for the consensus sequence.
+* A gzipped VCF file containing the variant calls for the consensus sequence.
 * A FASTA file containing the consensus sequence in FASTA format.
 * A CSV file containing the metadata associated with sequencing the sample.
 
@@ -29,7 +29,7 @@ where:
 
 The extensions (`[extension]`) should be:
 
-* `vcf` for the VCF file.
+* `vcf.gz` for the gzipped VCF file.
 * `fasta` for the FASTA file.
 * `csv` for the CSV metadata file.
 
