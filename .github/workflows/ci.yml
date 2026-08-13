@@ -43,6 +43,8 @@ jobs:
             python3 metadata/json2md.py --depth 2 uploader metadata/${p}.json >> docs/${p}.md
             python3 metadata/json2md.py --depth 1 analysis metadata/${p}-analysis.json >> docs/${p}-analysis.md
             python3 metadata/json2md.py template metadata/${p}.json > docs/${p}-template.csv
+            python3 metadata/json2md.py --title "Submission Specification" --depth 2 uploader metadata/${p}-downstream-analyses.json >> docs/${p}-downstream-analyses.md
+            python3 metadata/json2md.py --title "Read Specification" --depth 2 analysis metadata/${p}-downstream-analyses-analysis.json >> docs/${p}-downstream-analyses.md
           done
 
       - name: Deploy site

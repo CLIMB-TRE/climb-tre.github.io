@@ -84,18 +84,23 @@ nav:
       - mSCAPE:
           - Uploader Specification: mscape.md
           - Analysis Specification: mscape-analysis.md
+          - Downstream Analyses Specification: mscape-downstream-analyses.md
           - Changelog: mscape-changelog.md
       - PATH-SAFE:
           - Uploader Specification: pathsafe.md
           - Analysis Specification: pathsafe-analysis.md
+          - Downstream Analyses Specification: pathsafe-downstream-analyses.md
       - synthSCAPE:
           - Uploader Specification: synthscape.md
           - Analysis Specification: synthscape-analysis.md
+          - Downstream Analyses Specification: synthscape-downstream-analyses.md
       - openMGS:
           - Uploader Specification: openmgs.md
           - Analysis Specification: openmgs-analysis.md
+          - Downstream Analyses Specification: openmgs-downstream-analyses.md
       - HPRU GRE TB:
           - Uploader Specification: hprugretb.md
           - Analysis Specification: hprugretb-analysis.md
+          - Downstream Analyses Specification: hprugretb-downstream-analyses.md
   - Onyx Command-line & Python API: https://CLIMB-TRE.github.io/onyx-client/
   - Onyx JupyterLab Extension: https://CLIMB-TRE.github.io/onyx-extension/
