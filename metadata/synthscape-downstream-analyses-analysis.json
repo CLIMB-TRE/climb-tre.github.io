@@ -3,5 +3,244 @@
     "description": "Synthetic dataset for mSCAPE",
     "object_type": "analyses",
     "version": "N/A",
-    "fields": {}
+    "fields": {
+        "published_date": {
+            "description": "The date the object was published in Onyx.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "site": {
+            "description": "Site that uploaded the object.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "bham",
+                "synthscape",
+                "ukhsa"
+            ]
+        },
+        "analysis_id": {
+            "description": "Unique identifier for an analysis in Onyx.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 12"
+            ]
+        },
+        "analysis_date": {
+            "description": "The date the analysis was carried out.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "name": {
+            "description": "Name for the analysis, unique to the project.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "description": {
+            "description": "Description of the analysis.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 500"
+            ]
+        },
+        "pipeline_name": {
+            "description": "Name of the pipeline used for the analysis.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "pipeline_url": {
+            "description": "URL to the pipeline used for the analysis.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 200"
+            ]
+        },
+        "pipeline_version": {
+            "description": "Version of the pipeline used for the analysis.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 10"
+            ]
+        },
+        "pipeline_command": {
+            "description": "Command used to run the pipeline for the analysis.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 200"
+            ]
+        },
+        "methods": {
+            "description": "Structured details of the experiment run and its inputs.",
+            "type": "structure",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "default": {}
+        },
+        "result": {
+            "description": "Key findings of the analysis.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 200"
+            ]
+        },
+        "result_metrics": {
+            "description": "Structured output metrics from the result of the analysis.",
+            "type": "structure",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "default": {}
+        },
+        "report": {
+            "description": "HTML report produced from the analysis.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 200"
+            ]
+        },
+        "outputs": {
+            "description": "Directory of outputs produced from the analysis.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 200"
+            ]
+        },
+        "upstream_analyses": {
+            "description": "The analyses that this analysis depends on.",
+            "type": "identifiers",
+            "required": false,
+            "actions": [
+                "get",
+                "filter"
+            ]
+        },
+        "downstream_analyses": {
+            "description": "The analyses that depend on this analysis.",
+            "type": "identifiers",
+            "required": false,
+            "actions": [
+                "get",
+                "filter"
+            ]
+        },
+        "identifiers": {
+            "description": "Key anonymised identifiers involved in the analysis. This does not include the CLIMB ID (for these, see the {project}_records field).",
+            "type": "identifiers",
+            "required": true,
+            "actions": [
+                "get",
+                "filter"
+            ]
+        },
+        "synthscape_records": {
+            "description": "The records this analysis was produced from.",
+            "type": "identifiers",
+            "required": false,
+            "actions": [
+                "get",
+                "filter"
+            ]
+        }
+    }
 }

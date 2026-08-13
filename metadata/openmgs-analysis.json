@@ -1536,6 +1536,15 @@
                         "filter"
                     ]
                 },
+                "segment": {
+                    "description": "Segment identifier for segmented viruses, empty otherwise.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
                 "unique_accession": {
                     "description": "Unique reference identifier in the alignment database (everything prior to the first whitespace in the FASTA header).",
                     "type": "text",
@@ -1725,6 +1734,44 @@
                     "restrictions": [
                         "Min value: 0",
                         "Max value: 1"
+                    ]
+                },
+                "mean_alignment_complexity": {
+                    "description": "Mean sequence complexity of aligned bases; proportion of bases that differ from the preceding base.",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
+                    ]
+                },
+                "total_score": {
+                    "description": "Sum of per-metric band scores from the CLIMB-TRE/chimera scoring matrix. Can be negative; the range depends on the scoring matrix used.",
+                    "type": "integer",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "confidence": {
+                    "description": "Confidence category assigned from total_score by the CLIMB-TRE/chimera scoring matrix.",
+                    "type": "choice",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "fail",
+                        "high",
+                        "low",
+                        "medium",
+                        "unknown"
                     ]
                 }
             }
