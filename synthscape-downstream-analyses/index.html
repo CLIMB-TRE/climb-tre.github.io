@@ -1726,9 +1726,45 @@ visible when retrieving an analysis, including those assigned by Onyx.</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td><code>site</code></td>
+<td><code>choice</code></td>
+<td>Site that uploaded the object.</td>
+<td>• Choices: <code>bham</code>, <code>synthscape</code>, <code>ukhsa</code></td>
+</tr>
+<tr>
+<td><code>analysis_date</code></td>
+<td><code>date</code></td>
+<td>The date the analysis was carried out.</td>
+<td>• Input formats: <code>iso-8601</code><br>• Output format: <code>iso-8601</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>text</code></td>
+<td>Name for the analysis, unique to the project.</td>
+<td>• Max length: <code>50</code></td>
+</tr>
+<tr>
+<td><code>pipeline_name</code></td>
+<td><code>text</code></td>
+<td>Name of the pipeline used for the analysis.</td>
+<td>• Max length: <code>50</code></td>
+</tr>
+<tr>
+<td><code>pipeline_version</code></td>
+<td><code>text</code></td>
+<td>Version of the pipeline used for the analysis.</td>
+<td>• Max length: <code>10</code></td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td><code>text</code></td>
+<td>Key findings of the analysis.</td>
+<td>• Max length: <code>200</code></td>
+</tr>
+<tr>
+<td><code>identifiers</code></td>
+<td><code>identifiers</code></td>
+<td>Key anonymised identifiers involved in the analysis. This does not include the CLIMB ID (for these, see the {project}_records field).</td>
 <td></td>
 </tr>
 </tbody>
@@ -1745,9 +1781,63 @@ visible when retrieving an analysis, including those assigned by Onyx.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>is_published</code></td>
+<td><code>bool</code></td>
+<td>Indicator for whether an object has been published.</td>
+<td>• Default: <code>True</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>text</code></td>
+<td>Description of the analysis.</td>
+<td>• Max length: <code>500</code></td>
+</tr>
+<tr>
+<td><code>pipeline_url</code></td>
+<td><code>text</code></td>
+<td>URL to the pipeline used for the analysis.</td>
+<td>• Max length: <code>200</code></td>
+</tr>
+<tr>
+<td><code>pipeline_command</code></td>
+<td><code>text</code></td>
+<td>Command used to run the pipeline for the analysis.</td>
+<td>• Max length: <code>200</code></td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td><code>structure</code></td>
+<td>Structured details of the experiment run and its inputs.</td>
+<td>• Default: <code>{}</code></td>
+</tr>
+<tr>
+<td><code>result_metrics</code></td>
+<td><code>structure</code></td>
+<td>Structured output metrics from the result of the analysis.</td>
+<td>• Default: <code>{}</code></td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td><code>text</code></td>
+<td>HTML report produced from the analysis.</td>
+<td>• Max length: <code>200</code></td>
+</tr>
+<tr>
+<td><code>outputs</code></td>
+<td><code>text</code></td>
+<td>Directory of outputs produced from the analysis.</td>
+<td>• Max length: <code>200</code></td>
+</tr>
+<tr>
+<td><code>upstream_analyses</code></td>
+<td><code>identifiers</code></td>
+<td>The analyses that this analysis depends on.</td>
 <td></td>
-<td></td>
-<td></td>
+</tr>
+<tr>
+<td><code>synthscape_records</code></td>
+<td><code>identifiers</code></td>
+<td>The records this analysis was produced from.</td>
 <td></td>
 </tr>
 </tbody>
@@ -1765,9 +1855,117 @@ visible when retrieving an analysis, including those assigned by Onyx.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>published_date</code></td>
+<td><code>date</code></td>
+<td>The date the object was published in Onyx.</td>
+<td>• Output format: <code>iso-8601</code></td>
+</tr>
+<tr>
+<td><code>site</code></td>
+<td><code>choice</code></td>
+<td>Site that uploaded the object.</td>
+<td>• Choices: <code>bham</code>, <code>synthscape</code>, <code>ukhsa</code></td>
+</tr>
+<tr>
+<td><code>analysis_id</code></td>
+<td><code>text</code></td>
+<td>Unique identifier for an analysis in Onyx.</td>
 <td></td>
+</tr>
+<tr>
+<td><code>analysis_date</code></td>
+<td><code>date</code></td>
+<td>The date the analysis was carried out.</td>
+<td>• Output format: <code>iso-8601</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>text</code></td>
+<td>Name for the analysis, unique to the project.</td>
 <td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>text</code></td>
+<td>Description of the analysis.</td>
 <td></td>
+</tr>
+<tr>
+<td><code>pipeline_name</code></td>
+<td><code>text</code></td>
+<td>Name of the pipeline used for the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pipeline_url</code></td>
+<td><code>text</code></td>
+<td>URL to the pipeline used for the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pipeline_version</code></td>
+<td><code>text</code></td>
+<td>Version of the pipeline used for the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pipeline_command</code></td>
+<td><code>text</code></td>
+<td>Command used to run the pipeline for the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td><code>structure</code></td>
+<td>Structured details of the experiment run and its inputs.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td><code>text</code></td>
+<td>Key findings of the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result_metrics</code></td>
+<td><code>structure</code></td>
+<td>Structured output metrics from the result of the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td><code>text</code></td>
+<td>HTML report produced from the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>outputs</code></td>
+<td><code>text</code></td>
+<td>Directory of outputs produced from the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>upstream_analyses</code></td>
+<td><code>identifiers</code></td>
+<td>The analyses that this analysis depends on.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>downstream_analyses</code></td>
+<td><code>identifiers</code></td>
+<td>The analyses that depend on this analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>identifiers</code></td>
+<td><code>identifiers</code></td>
+<td>Key anonymised identifiers involved in the analysis. This does not include the CLIMB ID (for these, see the {project}_records field).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>synthscape_records</code></td>
+<td><code>identifiers</code></td>
+<td>The records this analysis was produced from.</td>
 <td></td>
 </tr>
 </tbody>

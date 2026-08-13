@@ -1755,7 +1755,7 @@
 <td><code>site</code></td>
 <td><code>choice</code></td>
 <td>The site or sequencing centre providing the data.</td>
-<td>• Choices: <code>barts</code>, <code>bham</code>, <code>cuh</code>, <code>gosh</code>, <code>gstt</code>, <code>nuth</code>, <code>public</code>, <code>ripl</code>, <code>ucl</code>, <code>uclh</code>, <code>uhs</code>, <code>ukhsa</code>, <code>ukhsabris</code>, <code>ukhsamanc</code>, <code>wtsi</code></td>
+<td>• Choices: <code>barts</code>, <code>bham</code>, <code>cuh</code>, <code>gosh</code>, <code>gstt</code>, <code>hpruphg</code>, <code>nuth</code>, <code>public</code>, <code>ripl</code>, <code>ucl</code>, <code>uclh</code>, <code>uhl</code>, <code>uhs</code>, <code>ukhsa</code>, <code>ukhsabris</code>, <code>ukhsamanc</code>, <code>wtsi</code></td>
 </tr>
 <tr>
 <td><code>climb_id</code></td>
@@ -2265,6 +2265,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>alignment_results.segment</code></td>
+<td><code>text</code></td>
+<td>Segment identifier for segmented viruses, empty otherwise.</td>
+<td></td>
+</tr>
+<tr>
 <td><code>alignment_results.unique_accession</code></td>
 <td><code>text</code></td>
 <td>Unique reference identifier in the alignment database (everything prior to the first whitespace in the FASTA header).</td>
@@ -2359,6 +2365,24 @@
 <td><code>decimal</code></td>
 <td>Mean of the proportion of each read which makes up the alignment to the reference (functionally mean_alignment_length / mean_read_length)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>alignment_results.mean_alignment_complexity</code></td>
+<td><code>decimal</code></td>
+<td>Mean sequence complexity of aligned bases; proportion of bases that differ from the preceding base.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>alignment_results.total_score</code></td>
+<td><code>integer</code></td>
+<td>Sum of per-metric band scores from the CLIMB-TRE/chimera scoring matrix. Can be negative; the range depends on the scoring matrix used.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>alignment_results.confidence</code></td>
+<td><code>choice</code></td>
+<td>Confidence category assigned from total_score by the CLIMB-TRE/chimera scoring matrix.</td>
+<td>• Choices: <code>fail</code>, <code>high</code>, <code>low</code>, <code>medium</code>, <code>unknown</code></td>
 </tr>
 </tbody>
 </table>
