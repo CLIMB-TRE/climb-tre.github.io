@@ -30,7 +30,7 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 ## 2026-01-19
 ### Onyx
 #### Added
-* Added `barts` (Barts Health NHS Trust) `site` option.
+* Added a new `site` option.
 
 ## 2026-01-07
 ### Onyx
@@ -88,9 +88,7 @@ Issues can be reported to the [mSCAPE DIPI group](https://github.com/CLIMB-TRE/m
 ## 2025-09-15
 ### Onyx
 #### Added
-* Added `ucl` (University College London) `site` option.
-* Added `ukhsamanc` (UKHSA Manchester Lab) `site` option.
-* Added `ukhsabris` (UKHSA Bristol Lab) `site` option.
+* Added three new `site` options.
 
 ## 2025-08-13
 ### Onyx
@@ -171,7 +169,7 @@ Released version 2.0.0. Given the number of changes, they are grouped by categor
 ## 2025-03-31
 ### Onyx
 #### Added
-* Added `nuth` (Newcastle upon Tyne Hospitals NHS Foundation Trust) as an option in the mSCAPE `site` field. 
+* Added a new option in the mSCAPE `site` field.
 
 ## 2025-03-06
 ### All

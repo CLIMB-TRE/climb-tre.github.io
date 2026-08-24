@@ -33,11 +33,6 @@
             "required": true,
             "actions": [
                 "testadd"
-            ],
-            "values": [
-                "bham",
-                "synthscape",
-                "ukhsa"
             ]
         },
         "climb_id": {

@@ -23,11 +23,6 @@
             "actions": [
                 "add",
                 "testadd"
-            ],
-            "values": [
-                "bham",
-                "synthscape",
-                "ukhsa"
             ]
         },
         "analysis_date": {

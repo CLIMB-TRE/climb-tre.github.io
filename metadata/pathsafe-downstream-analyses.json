@@ -23,16 +23,6 @@
             "actions": [
                 "add",
                 "testadd"
-            ],
-            "values": [
-                "ACE",
-                "APHA",
-                "CGPS",
-                "FSA",
-                "FSS",
-                "PHS",
-                "SSSCDRL",
-                "UKHSA"
             ]
         },
         "analysis_date": {

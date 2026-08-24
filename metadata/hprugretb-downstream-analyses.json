@@ -23,9 +23,6 @@
             "actions": [
                 "add",
                 "testadd"
-            ],
-            "values": [
-                "ukhsahprugenomics"
             ]
         },
         "analysis_date": {

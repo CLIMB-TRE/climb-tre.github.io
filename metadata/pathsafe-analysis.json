@@ -28,16 +28,6 @@
                 "list",
                 "filter",
                 "history"
-            ],
-            "values": [
-                "ACE",
-                "APHA",
-                "CGPS",
-                "FSA",
-                "FSS",
-                "PHS",
-                "SSSCDRL",
-                "UKHSA"
             ]
         },
         "climb_id": {

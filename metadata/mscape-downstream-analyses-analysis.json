@@ -28,25 +28,6 @@
                 "list",
                 "filter",
                 "history"
-            ],
-            "values": [
-                "barts",
-                "bham",
-                "cuh",
-                "gosh",
-                "gstt",
-                "hpruphg",
-                "nuth",
-                "public",
-                "ripl",
-                "ucl",
-                "uclh",
-                "uhl",
-                "uhs",
-                "ukhsa",
-                "ukhsabris",
-                "ukhsamanc",
-                "wtsi"
             ]
         },
         "analysis_id": {

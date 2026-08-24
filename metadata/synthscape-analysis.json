@@ -28,11 +28,6 @@
                 "list",
                 "filter",
                 "history"
-            ],
-            "values": [
-                "bham",
-                "synthscape",
-                "ukhsa"
             ]
         },
         "climb_id": {

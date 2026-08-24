@@ -36,9 +36,6 @@
             "required": true,
             "actions": [
                 "testadd"
-            ],
-            "values": [
-                "ukhsahprugenomics"
             ]
         },
         "climb_id": {

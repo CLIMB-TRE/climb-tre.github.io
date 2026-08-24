@@ -47,7 +47,7 @@ Files should be uploaded to S3 buckets hosted at the [`s3.climb.ac.uk`](https://
 The bucket names are a combination of:
 
 * Project (e.g. `mscape`).
-* Site code (e.g. `bham`).
+* Your site code (issued to you when your site is onboarded).
 * Platform (e.g. `illumina`).
 * A flag that indicates a test (`test`) or production (`prod`) submission.
 

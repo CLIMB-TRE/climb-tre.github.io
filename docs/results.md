@@ -32,9 +32,9 @@ A result JSON will look similar to this:
 {
   "uuid": "f84ae65d-ec57-443a-946f-6af34bace889",
   "site": "synthscape",
-  "raw_site": "synthscape.ukhsa",
+  "raw_site": "synthscape.sitecode",
   "uploaders": [
-    "bryn-synthscape-ukhsa"
+    "bryn-synthscape-sitecode"
   ],
   "match_timestamp": 1.7286538918609505e+18,
   "artifact": "synthscape|0|183c4a97-d269-4014-9304-9b1f840cd0cd",
@@ -44,10 +44,10 @@ A result JSON will look similar to this:
   "platform": "ont",
   "files": {
     ".csv": {
-      "uri": "s3://synthscape-synthscape.ukhsa-ont-prod/synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.csv",
+      "uri": "s3://synthscape-synthscape.sitecode-ont-prod/synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.csv",
       "etag": "0b17ccec938f4876029972c4d37dba72",
       "key": "synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.csv",
-      "submitter": "bryn-synthscape-ukhsa",
+      "submitter": "bryn-synthscape-sitecode",
       "parsed_fname": {
         "project": "synthscape",
         "run_index": "0",
@@ -56,10 +56,10 @@ A result JSON will look similar to this:
       }
     },
     ".fastq.gz": {
-      "uri": "s3://synthscape-synthscape.ukhsa-ont-prod/synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.fastq.gz",
+      "uri": "s3://synthscape-synthscape.sitecode-ont-prod/synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.fastq.gz",
       "etag": "62adfae7ac5dcbcc3a770133e2bcf7e5",
       "key": "synthscape.0.183c4a97-d269-4014-9304-9b1f840cd0cd.fastq.gz",
-      "submitter": "bryn-synthscape-ukhsa",
+      "submitter": "bryn-synthscape-sitecode",
       "parsed_fname": {
         "project": "synthscape",
         "run_index": "0",
