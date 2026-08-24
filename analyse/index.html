@@ -1729,10 +1729,10 @@ or modify the <code>filter</code> command to only request them using the <code>-
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1">(onyx) jovyan:~$ onyx filter mscape --field extraction_enrichment_protocol.icontains=zymo --include=taxon_reports
 </span><span id="__span-8-2">[
 </span><span id="__span-8-3">    {
-</span><span id="__span-8-4">        &quot;taxon_reports&quot;: &quot;s3://mscape-published-taxon-reports/C-FDE50853AD/&quot;
+</span><span id="__span-8-4">        "taxon_reports": "s3://mscape-published-taxon-reports/C-FDE50853AD/"
 </span><span id="__span-8-5">    },
 </span><span id="__span-8-6">    {
-</span><span id="__span-8-7">        &quot;taxon_reports&quot;: &quot;s3://mscape-published-taxon-reports/C-04F4495068/&quot;
+</span><span id="__span-8-7">        "taxon_reports": "s3://mscape-published-taxon-reports/C-04F4495068/"
 </span><span id="__span-8-8">    }
 </span><span id="__span-8-9">]
 </span></code></pre></div>
@@ -1740,12 +1740,12 @@ Multiple fields can be requested with the <code>--include</code> flag e.g.
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1">(onyx) jovyan:~$ onyx filter mscape --field extraction_enrichment_protocol.icontains=zymo --include climb_id,taxon_reports
 </span><span id="__span-9-2">[
 </span><span id="__span-9-3">    {
-</span><span id="__span-9-4">        &quot;climb_id&quot;: &quot;C-FDE50853AD&quot;,
-</span><span id="__span-9-5">        &quot;taxon_reports&quot;: &quot;s3://mscape-published-taxon-reports/C-FDE50853AD/&quot;
+</span><span id="__span-9-4">        "climb_id": "C-FDE50853AD",
+</span><span id="__span-9-5">        "taxon_reports": "s3://mscape-published-taxon-reports/C-FDE50853AD/"
 </span><span id="__span-9-6">    },
 </span><span id="__span-9-7">    {
-</span><span id="__span-9-8">        &quot;climb_id&quot;: &quot;C-04F4495068&quot;,
-</span><span id="__span-9-9">        &quot;taxon_reports&quot;: &quot;s3://mscape-published-taxon-reports/C-04F4495068/&quot;
+</span><span id="__span-9-8">        "climb_id": "C-04F4495068",
+</span><span id="__span-9-9">        "taxon_reports": "s3://mscape-published-taxon-reports/C-04F4495068/"
 </span><span id="__span-9-10">    }
 </span><span id="__span-9-11">]
 </span></code></pre></div>
@@ -1760,7 +1760,7 @@ with <code>s3cmd</code>.
 </span></code></pre></div>
 The plain text report is what we're after, so let's download that with <code>s3cmd</code>:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1">(onyx) jovyan:~$ s3cmd get s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt
-</span><span id="__span-11-2">download: &#39;s3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt&#39; -&gt; &#39;./PlusPF.kraken_report.txt&#39;  [1 of 1]
+</span><span id="__span-11-2">download: 's3://mscape-published-taxon-reports/C-FDE50853AD/PlusPF.kraken_report.txt' -&gt; './PlusPF.kraken_report.txt'  [1 of 1]
 </span><span id="__span-11-3"> 197750 of 197750   100% in    0s     3.79 MB/s  done
 </span></code></pre></div></p>
 <p>If you've never seen one of these reports before, it's worth having a
@@ -1771,7 +1771,7 @@ JupyterLab file browser.  For reference, it's worth showing the header
 </span></code></pre></div>
 The Zymo sample is prepared with 12% <em>Bacillus subtilis</em>.  Let's see how much
 was actually reported in the results:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1">(onyx) jovyan:~$ grep &quot;Bacillus subtilis&quot; PlusPF.kraken_report.txt
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1">(onyx) jovyan:~$ grep "Bacillus subtilis" PlusPF.kraken_report.txt
 </span><span id="__span-13-2"> 20.30  435278  1452    G1      653685                    Bacillus subtilis group
 </span><span id="__span-13-3">  0.12  2624    1952    S       1423                        Bacillus subtilis
 </span><span id="__span-13-4">  0.03  565     242     S1      135461                        Bacillus subtilis subsp. subtilis
@@ -1803,9 +1803,9 @@ manager.
 </span><span id="__span-14-8">
 </span><span id="__span-14-9"><span class="k">with</span> <span class="n">OnyxClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 </span><span id="__span-14-10">    <span class="n">records</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-</span><span id="__span-14-11">        <span class="s2">&quot;mscape&quot;</span><span class="p">,</span>
+</span><span id="__span-14-11">        <span class="s2">"mscape"</span><span class="p">,</span>
 </span><span id="__span-14-12">        <span class="n">fields</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-14-13">            <span class="s2">&quot;extraction_enrichment_protocol__icontains&quot;</span><span class="p">:</span> <span class="s2">&quot;zymo&quot;</span><span class="p">,</span>
+</span><span id="__span-14-13">            <span class="s2">"extraction_enrichment_protocol__icontains"</span><span class="p">:</span> <span class="s2">"zymo"</span><span class="p">,</span>
 </span><span id="__span-14-14">        <span class="p">},</span>
 </span><span id="__span-14-15">    <span class="p">))</span>
 </span></code></pre></div>
@@ -1823,25 +1823,25 @@ taxon.  A simple first step is to convert the taxonomic data (for the first reco
 into a Pandas DataFrame with
 <div class="language-py highlight"><pre><span></span><code><span id="__span-16-1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </span><span id="__span-16-2">
-</span><span id="__span-16-3"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;taxa_files&#39;</span><span class="p">])</span>
+</span><span id="__span-16-3"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'taxa_files'</span><span class="p">])</span>
 </span></code></pre></div>
 We also need to drop a few lower-level taxa that are already
 accounted for in higher ones. e.g. the reads for <em>Bacillus spizizenii TU-B-10</em> are
 among the reads counted for <em>Bacillus spizizenii</em>.  A quick way of doing this
 is by selecting the rows that have only two words in their names.
-<div class="language-py highlight"><pre><span></span><code><span id="__span-17-1"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;human_readable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)]</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-17-1"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'human_readable'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)]</span>
 </span></code></pre></div>
 Now, let's add columns for the total number of base pairs associated with
 each taxon and what proportion that is of the total.
-<div class="language-py highlight"><pre><span></span><code><span id="__span-18-1"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gDNA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_reads&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;mean_len&#39;</span><span class="p">]</span>
-</span><span id="__span-18-2"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;proportion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gDNA&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gDNA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-18-1"><span class="n">df</span><span class="p">[</span><span class="s1">'gDNA'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'n_reads'</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">'mean_len'</span><span class="p">]</span>
+</span><span id="__span-18-2"><span class="n">df</span><span class="p">[</span><span class="s1">'proportion'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'gDNA'</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">'gDNA'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </span></code></pre></div>
 Finally, let's make a rough plot with a black dashed line at 12%.
 <div class="language-py highlight"><pre><span></span><code><span id="__span-19-1"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-19-2">
-</span><span id="__span-19-3"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;human_readable&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;proportion&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
-</span><span id="__span-19-4"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">);</span>
-</span><span id="__span-19-5"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mf">22.5</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">);</span>
+</span><span id="__span-19-3"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'human_readable'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">'proportion'</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">)</span>
+</span><span id="__span-19-4"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'--'</span><span class="p">);</span>
+</span><span id="__span-19-5"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mf">22.5</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">);</span>
 </span></code></pre></div></p>
 <p><img alt="Measured gDNA proportions of a Zymo community" src="../zymo-comparison.png" /></p>
 <p>There are some clear discrepancies—<em>Pseudomonas aeruginosa</em> is

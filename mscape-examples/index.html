@@ -1609,27 +1609,27 @@
 </span><span id="__span-1-7"><span class="p">)</span>
 </span><span id="__span-1-8">
 </span><span id="__span-1-9"><span class="k">with</span> <span class="n">OnyxClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-1-10">    <span class="c1"># Filter for read sets containing &quot;pseudomonas&quot;</span>
+</span><span id="__span-1-10">    <span class="c1"># Filter for read sets containing "pseudomonas"</span>
 </span><span id="__span-1-11">    <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-</span><span id="__span-1-12">        <span class="s2">&quot;mscape&quot;</span><span class="p">,</span>
-</span><span id="__span-1-13">        <span class="n">query</span><span class="o">=</span><span class="n">OnyxField</span><span class="p">(</span><span class="n">taxa_files__human_readable__icontains</span><span class="o">=</span><span class="s2">&quot;pseudomonas&quot;</span><span class="p">),</span>
+</span><span id="__span-1-12">        <span class="s2">"mscape"</span><span class="p">,</span>
+</span><span id="__span-1-13">        <span class="n">query</span><span class="o">=</span><span class="n">OnyxField</span><span class="p">(</span><span class="n">taxa_files__human_readable__icontains</span><span class="o">=</span><span class="s2">"pseudomonas"</span><span class="p">),</span>
 </span><span id="__span-1-14">    <span class="p">):</span>
 </span><span id="__span-1-15">        <span class="c1"># Do analysis here</span>
-</span><span id="__span-1-16">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CLIMB ID:&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;climb_id&quot;</span><span class="p">])</span>
-</span><span id="__span-1-17">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Published date:&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;published_date&quot;</span><span class="p">])</span>
+</span><span id="__span-1-16">        <span class="nb">print</span><span class="p">(</span><span class="s2">"CLIMB ID:"</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">"climb_id"</span><span class="p">])</span>
+</span><span id="__span-1-17">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Published date:"</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">"published_date"</span><span class="p">])</span>
 </span><span id="__span-1-18">
 </span><span id="__span-1-19">        <span class="c1"># The query command by default does not return taxonomic information</span>
 </span><span id="__span-1-20">        <span class="c1"># To get this, we have to call the `get` method and retrieve the samples individually</span>
-</span><span id="__span-1-21">        <span class="n">full_metadata</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mscape&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;climb_id&quot;</span><span class="p">])</span>
+</span><span id="__span-1-21">        <span class="n">full_metadata</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mscape"</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">"climb_id"</span><span class="p">])</span>
 </span><span id="__span-1-22">
 </span><span id="__span-1-23">        <span class="c1"># Now we can inspect the taxonomic information for the readset</span>
 </span><span id="__span-1-24">        <span class="nb">print</span><span class="p">(</span>
-</span><span id="__span-1-25">            <span class="s2">&quot;Number of binned reads:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_metadata</span><span class="p">[</span><span class="s2">&quot;taxa_files&quot;</span><span class="p">])</span>
+</span><span id="__span-1-25">            <span class="s2">"Number of binned reads:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_metadata</span><span class="p">[</span><span class="s2">"taxa_files"</span><span class="p">])</span>
 </span><span id="__span-1-26">        <span class="p">)</span>  <span class="c1"># etc. Do more analysis</span>
-</span><span id="__span-1-27">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pseudomonas taxa:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-28">        <span class="k">for</span> <span class="n">taxa</span> <span class="ow">in</span> <span class="n">full_metadata</span><span class="p">[</span><span class="s2">&quot;taxa_files&quot;</span><span class="p">]:</span>
-</span><span id="__span-1-29">            <span class="k">if</span> <span class="s2">&quot;pseudomonas&quot;</span> <span class="ow">in</span> <span class="n">taxa</span><span class="p">[</span><span class="s2">&quot;human_readable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-</span><span id="__span-1-30">                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">taxa</span><span class="p">[</span><span class="s2">&quot;human_readable&quot;</span><span class="p">])</span>
+</span><span id="__span-1-27">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Pseudomonas taxa:"</span><span class="p">)</span>
+</span><span id="__span-1-28">        <span class="k">for</span> <span class="n">taxa</span> <span class="ow">in</span> <span class="n">full_metadata</span><span class="p">[</span><span class="s2">"taxa_files"</span><span class="p">]:</span>
+</span><span id="__span-1-29">            <span class="k">if</span> <span class="s2">"pseudomonas"</span> <span class="ow">in</span> <span class="n">taxa</span><span class="p">[</span><span class="s2">"human_readable"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+</span><span id="__span-1-30">                <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="n">taxa</span><span class="p">[</span><span class="s2">"human_readable"</span><span class="p">])</span>
 </span></code></pre></div>
 <p>Example output for this python script:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1">CLIMB ID: C-FE89BACF2D
@@ -1672,13 +1672,13 @@
 </span><span id="__span-4-8">
 </span><span id="__span-4-9"><span class="k">with</span> <span class="n">OnyxClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 </span><span id="__span-4-10">    <span class="k">for</span> <span class="n">summary_data</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-</span><span id="__span-4-11">        <span class="s2">&quot;mscape&quot;</span><span class="p">,</span>
-</span><span id="__span-4-12">        <span class="n">summarise</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;taxa_files__taxon_id&quot;</span><span class="p">,</span> <span class="s2">&quot;taxa_files__human_readable&quot;</span><span class="p">],</span>
+</span><span id="__span-4-11">        <span class="s2">"mscape"</span><span class="p">,</span>
+</span><span id="__span-4-12">        <span class="n">summarise</span><span class="o">=</span><span class="p">[</span><span class="s2">"taxa_files__taxon_id"</span><span class="p">,</span> <span class="s2">"taxa_files__human_readable"</span><span class="p">],</span>
 </span><span id="__span-4-13">    <span class="p">):</span>
 </span><span id="__span-4-14">        <span class="c1"># Do analysis here</span>
-</span><span id="__span-4-15">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Taxon ID:&quot;</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">&quot;taxa_files__taxon_id&quot;</span><span class="p">])</span>
-</span><span id="__span-4-16">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Taxon name:&quot;</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">&quot;taxa_files__human_readable&quot;</span><span class="p">])</span>
-</span><span id="__span-4-17">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of readsets present:&quot;</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">])</span>
+</span><span id="__span-4-15">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Taxon ID:"</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">"taxa_files__taxon_id"</span><span class="p">])</span>
+</span><span id="__span-4-16">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Taxon name:"</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">"taxa_files__human_readable"</span><span class="p">])</span>
+</span><span id="__span-4-17">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Number of readsets present:"</span><span class="p">,</span> <span class="n">summary_data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">])</span>
 </span></code></pre></div>
 <p>Example output for this python script:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1">Taxon ID: 1304
