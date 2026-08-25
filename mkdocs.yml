@@ -102,5 +102,9 @@ nav:
           - Uploader Specification: hprugretb.md
           - Analysis Specification: hprugretb-analysis.md
           - Downstream Analyses Specification: hprugretb-downstream-analyses.md
+      - devSCAPE:
+          - Uploader Specification: devscape.md
+          - Analysis Specification: devscape-analysis.md
+          - Downstream Analyses Specification: devscape-downstream-analyses.md
   - Onyx Command-line & Python API: https://CLIMB-TRE.github.io/onyx-client/
   - Onyx JupyterLab Extension: https://CLIMB-TRE.github.io/onyx-extension/

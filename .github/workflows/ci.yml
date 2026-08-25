@@ -10,7 +10,7 @@ permissions:
 
 env:
   # Project codes
-  ONYX_PROJECT_CODES: mscape,synthscape,openmgs,pathsafe,hprugretb
+  ONYX_PROJECT_CODES: mscape,synthscape,openmgs,pathsafe,hprugretb,devscape
 
 jobs:
   deploy:
