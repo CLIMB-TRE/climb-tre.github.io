@@ -1,1 +1,1961 @@
-{}
+{
+    "name": "devSCAPE",
+    "description": "Development environment for mSCAPE",
+    "object_type": "records",
+    "version": "0.1.0",
+    "fields": {
+        "published_date": {
+            "description": "The date the object was published in Onyx.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: iso-8601",
+                "Output format: iso-8601"
+            ]
+        },
+        "site": {
+            "description": "The site or sequencing centre providing the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "climb_id": {
+            "description": "Unique identifier for a project record in Onyx.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 12"
+            ]
+        },
+        "biosample_id": {
+            "description": "The sequencing provider's identifier for a sample.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "biosample_source_id": {
+            "description": "Unique identifier for an individual to permit multiple samples from the same individual to be linked.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 50"
+            ]
+        },
+        "run_id": {
+            "description": "Unique identifier assigned to the run by the sequencing instrument.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "platform": {
+            "description": "The platform used to sequence the data.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "illumina",
+                "illumina.se",
+                "ont"
+            ]
+        },
+        "input_type": {
+            "description": "The type of input sequenced.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "community_standard",
+                "negative_control",
+                "positive_control",
+                "specimen",
+                "validation_material"
+            ]
+        },
+        "specimen_type_details": {
+            "description": "Named control or standard for specimens.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "asymptomatic",
+                "respiratory_infection"
+            ],
+            "restrictions": [
+                "Required when input_type is: specimen"
+            ]
+        },
+        "control_type_details": {
+            "description": "Named control or standard for positive and negative controls.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "NIBSC_11/242",
+                "NIBSC_20/170",
+                "bacillus_ms2phage",
+                "resp_matrix_mc110",
+                "water_extraction_control",
+                "zepto_rp2.1",
+                "zymo-mc_D6300"
+            ],
+            "restrictions": [
+                "Required when input_type is: positive_control",
+                "Required when input_type is: negative_control"
+            ]
+        },
+        "sample_source": {
+            "description": "The source from which the sample was collected.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "blood",
+                "environment",
+                "faecal",
+                "lower_respiratory",
+                "nose_and_throat",
+                "other",
+                "plasma",
+                "pleural_fluid",
+                "stool",
+                "tissue",
+                "upper_respiratory",
+                "urine"
+            ]
+        },
+        "sample_type": {
+            "description": "The type of sampling method used.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "aspirate",
+                "bal",
+                "biopsy",
+                "other",
+                "sputum",
+                "swab"
+            ]
+        },
+        "spike_in": {
+            "description": "The type of spike-in used in the run.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "ERCC-RNA_4456740",
+                "bacillus_ms2phage",
+                "ms2-phage",
+                "none",
+                "phix",
+                "tobacco_mosaic_virus",
+                "zymo_D6320",
+                "zymo_D6321"
+            ]
+        },
+        "spike_in_result": {
+            "description": "Result assigned by scylla for the provided spike-in.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "fail",
+                "partial",
+                "pass"
+            ]
+        },
+        "collection_date": {
+            "description": "The date the sample was collected.",
+            "type": "date",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM, YYYY-MM-DD",
+                "Output format: YYYY-MM-DD",
+                "At least one required: collection_date, received_date"
+            ]
+        },
+        "received_date": {
+            "description": "The date the sample was received by the sequencing centre (if collection_date unavailable).",
+            "type": "date",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM, YYYY-MM-DD",
+                "Output format: YYYY-MM-DD",
+                "At least one required: collection_date, received_date"
+            ]
+        },
+        "is_approximate_date": {
+            "description": "The date is approximate e.g. the sample is from a public repository and it is unclear whether the date corresponds to collection or publishing.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "batch_id": {
+            "description": "Used to identify samples prepared in the same laboratory batch (e.g. extraction, library and/or sequencing).",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "study_id": {
+            "description": "Used to identify study or if NHS residual sample.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "study_centre_id": {
+            "description": "Used to identify sequencing centre.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Max length: 100"
+            ]
+        },
+        "sequence_purpose": {
+            "description": "Used to differentiate between clinical or research studies.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "clinical",
+                "research"
+            ]
+        },
+        "governance_status": {
+            "description": "Did the patient consent to their sample being used for research purposes or not.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": "no_consent_for_research",
+            "values": [
+                "consented_for_research",
+                "no_consent_for_research",
+                "open"
+            ]
+        },
+        "iso_country": {
+            "description": "Country that the sample was collected in, using ISO-3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), unless within United Kingdom. If so, use ISO-3166-2:GB (https://en.wikipedia.org/wiki/ISO_3166-2:GB).",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "AD",
+                "AE",
+                "AF",
+                "AG",
+                "AI",
+                "AL",
+                "AM",
+                "AO",
+                "AQ",
+                "AR",
+                "AS",
+                "AT",
+                "AU",
+                "AW",
+                "AX",
+                "AZ",
+                "BA",
+                "BB",
+                "BD",
+                "BE",
+                "BF",
+                "BG",
+                "BH",
+                "BI",
+                "BJ",
+                "BL",
+                "BM",
+                "BN",
+                "BO",
+                "BQ",
+                "BR",
+                "BS",
+                "BT",
+                "BV",
+                "BW",
+                "BY",
+                "BZ",
+                "CA",
+                "CC",
+                "CD",
+                "CF",
+                "CG",
+                "CH",
+                "CI",
+                "CK",
+                "CL",
+                "CM",
+                "CN",
+                "CO",
+                "CR",
+                "CU",
+                "CV",
+                "CW",
+                "CX",
+                "CY",
+                "CZ",
+                "DE",
+                "DJ",
+                "DK",
+                "DM",
+                "DO",
+                "DZ",
+                "EC",
+                "EE",
+                "EG",
+                "EH",
+                "ER",
+                "ES",
+                "ET",
+                "FI",
+                "FJ",
+                "FK",
+                "FM",
+                "FO",
+                "FR",
+                "GA",
+                "GB",
+                "GB-ENG",
+                "GB-NIR",
+                "GB-SCT",
+                "GB-WLS",
+                "GD",
+                "GE",
+                "GF",
+                "GG",
+                "GH",
+                "GI",
+                "GL",
+                "GM",
+                "GN",
+                "GP",
+                "GQ",
+                "GR",
+                "GS",
+                "GT",
+                "GU",
+                "GW",
+                "GY",
+                "HK",
+                "HM",
+                "HN",
+                "HR",
+                "HT",
+                "HU",
+                "ID",
+                "IE",
+                "IL",
+                "IM",
+                "IN",
+                "IO",
+                "IQ",
+                "IR",
+                "IS",
+                "IT",
+                "JE",
+                "JM",
+                "JO",
+                "JP",
+                "KE",
+                "KG",
+                "KH",
+                "KI",
+                "KM",
+                "KN",
+                "KP",
+                "KR",
+                "KW",
+                "KY",
+                "KZ",
+                "LA",
+                "LB",
+                "LC",
+                "LI",
+                "LK",
+                "LR",
+                "LS",
+                "LT",
+                "LU",
+                "LV",
+                "LY",
+                "MA",
+                "MC",
+                "MD",
+                "ME",
+                "MF",
+                "MG",
+                "MH",
+                "MK",
+                "ML",
+                "MM",
+                "MN",
+                "MO",
+                "MP",
+                "MQ",
+                "MR",
+                "MS",
+                "MT",
+                "MU",
+                "MV",
+                "MW",
+                "MX",
+                "MY",
+                "MZ",
+                "NA",
+                "NC",
+                "NE",
+                "NF",
+                "NG",
+                "NI",
+                "NL",
+                "NO",
+                "NP",
+                "NR",
+                "NU",
+                "NZ",
+                "OM",
+                "PA",
+                "PE",
+                "PF",
+                "PG",
+                "PH",
+                "PK",
+                "PL",
+                "PM",
+                "PN",
+                "PR",
+                "PS",
+                "PT",
+                "PW",
+                "PY",
+                "QA",
+                "RE",
+                "RO",
+                "RS",
+                "RU",
+                "RW",
+                "SA",
+                "SB",
+                "SC",
+                "SD",
+                "SE",
+                "SG",
+                "SH",
+                "SI",
+                "SJ",
+                "SK",
+                "SL",
+                "SM",
+                "SN",
+                "SO",
+                "SR",
+                "SS",
+                "ST",
+                "SV",
+                "SX",
+                "SY",
+                "SZ",
+                "TC",
+                "TD",
+                "TF",
+                "TG",
+                "TH",
+                "TJ",
+                "TK",
+                "TL",
+                "TM",
+                "TN",
+                "TO",
+                "TR",
+                "TT",
+                "TV",
+                "TW",
+                "TZ",
+                "UA",
+                "UG",
+                "UM",
+                "US",
+                "UY",
+                "UZ",
+                "VA",
+                "VC",
+                "VE",
+                "VG",
+                "VI",
+                "VN",
+                "VU",
+                "WF",
+                "WS",
+                "YE",
+                "YT",
+                "ZA",
+                "ZM",
+                "ZW"
+            ]
+        },
+        "iso_region": {
+            "description": "Region that the sample was collected in, using the second level subdivision codes of ISO-3166-2:GB (https://www.iso.org/obp/ui/#iso:code:3166:GB).",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "GB-ABC",
+                "GB-ABD",
+                "GB-ABE",
+                "GB-AGB",
+                "GB-AGY",
+                "GB-AND",
+                "GB-ANN",
+                "GB-ANS",
+                "GB-BAS",
+                "GB-BBD",
+                "GB-BCP",
+                "GB-BDF",
+                "GB-BDG",
+                "GB-BEN",
+                "GB-BEX",
+                "GB-BFS",
+                "GB-BGE",
+                "GB-BGW",
+                "GB-BIR",
+                "GB-BKM",
+                "GB-BNE",
+                "GB-BNH",
+                "GB-BNS",
+                "GB-BOL",
+                "GB-BPL",
+                "GB-BRC",
+                "GB-BRD",
+                "GB-BRY",
+                "GB-BST",
+                "GB-BUR",
+                "GB-CAM",
+                "GB-CAY",
+                "GB-CBF",
+                "GB-CCG",
+                "GB-CGN",
+                "GB-CHE",
+                "GB-CHW",
+                "GB-CLD",
+                "GB-CLK",
+                "GB-CMA",
+                "GB-CMD",
+                "GB-CMN",
+                "GB-CON",
+                "GB-COV",
+                "GB-CRF",
+                "GB-CRY",
+                "GB-CWY",
+                "GB-DAL",
+                "GB-DBY",
+                "GB-DEN",
+                "GB-DER",
+                "GB-DEV",
+                "GB-DGY",
+                "GB-DNC",
+                "GB-DND",
+                "GB-DOR",
+                "GB-DRS",
+                "GB-DUD",
+                "GB-DUR",
+                "GB-EAL",
+                "GB-EAY",
+                "GB-EDH",
+                "GB-EDU",
+                "GB-ELN",
+                "GB-ELS",
+                "GB-ENF",
+                "GB-ERW",
+                "GB-ERY",
+                "GB-ESS",
+                "GB-ESX",
+                "GB-FAL",
+                "GB-FIF",
+                "GB-FLN",
+                "GB-FMO",
+                "GB-GAT",
+                "GB-GLG",
+                "GB-GLS",
+                "GB-GRE",
+                "GB-GWN",
+                "GB-HAL",
+                "GB-HAM",
+                "GB-HAV",
+                "GB-HCK",
+                "GB-HEF",
+                "GB-HIL",
+                "GB-HLD",
+                "GB-HMF",
+                "GB-HNS",
+                "GB-HPL",
+                "GB-HRT",
+                "GB-HRW",
+                "GB-HRY",
+                "GB-IOS",
+                "GB-IOW",
+                "GB-ISL",
+                "GB-IVC",
+                "GB-KEC",
+                "GB-KEN",
+                "GB-KHL",
+                "GB-KIR",
+                "GB-KTT",
+                "GB-KWL",
+                "GB-LAN",
+                "GB-LBC",
+                "GB-LBH",
+                "GB-LCE",
+                "GB-LDS",
+                "GB-LEC",
+                "GB-LEW",
+                "GB-LIN",
+                "GB-LIV",
+                "GB-LND",
+                "GB-LUT",
+                "GB-MAN",
+                "GB-MDB",
+                "GB-MDW",
+                "GB-MEA",
+                "GB-MIK",
+                "GB-MLN",
+                "GB-MON",
+                "GB-MRT",
+                "GB-MRY",
+                "GB-MTY",
+                "GB-MUL",
+                "GB-NAY",
+                "GB-NBL",
+                "GB-NEL",
+                "GB-NET",
+                "GB-NFK",
+                "GB-NGM",
+                "GB-NLK",
+                "GB-NLN",
+                "GB-NMD",
+                "GB-NNH",
+                "GB-NSM",
+                "GB-NTL",
+                "GB-NTT",
+                "GB-NTY",
+                "GB-NWM",
+                "GB-NWP",
+                "GB-NYK",
+                "GB-OLD",
+                "GB-ORK",
+                "GB-OXF",
+                "GB-PEM",
+                "GB-PKN",
+                "GB-PLY",
+                "GB-POR",
+                "GB-POW",
+                "GB-PTE",
+                "GB-RCC",
+                "GB-RCH",
+                "GB-RCT",
+                "GB-RDB",
+                "GB-RDG",
+                "GB-RFW",
+                "GB-RIC",
+                "GB-ROT",
+                "GB-RUT",
+                "GB-SAW",
+                "GB-SAY",
+                "GB-SCB",
+                "GB-SFK",
+                "GB-SFT",
+                "GB-SGC",
+                "GB-SHF",
+                "GB-SHN",
+                "GB-SHR",
+                "GB-SKP",
+                "GB-SLF",
+                "GB-SLG",
+                "GB-SLK",
+                "GB-SND",
+                "GB-SOL",
+                "GB-SOM",
+                "GB-SOS",
+                "GB-SRY",
+                "GB-STE",
+                "GB-STG",
+                "GB-STH",
+                "GB-STN",
+                "GB-STS",
+                "GB-STT",
+                "GB-STY",
+                "GB-SWA",
+                "GB-SWD",
+                "GB-SWK",
+                "GB-TAM",
+                "GB-TFW",
+                "GB-THR",
+                "GB-TOB",
+                "GB-TOF",
+                "GB-TRF",
+                "GB-TWH",
+                "GB-VGL",
+                "GB-WAR",
+                "GB-WBK",
+                "GB-WDU",
+                "GB-WFT",
+                "GB-WGN",
+                "GB-WIL",
+                "GB-WKF",
+                "GB-WLL",
+                "GB-WLN",
+                "GB-WLV",
+                "GB-WND",
+                "GB-WNH",
+                "GB-WNM",
+                "GB-WOK",
+                "GB-WOR",
+                "GB-WRL",
+                "GB-WRT",
+                "GB-WRX",
+                "GB-WSM",
+                "GB-WSX",
+                "GB-YOR",
+                "GB-ZET"
+            ],
+            "restrictions": [
+                "Requires: iso_country"
+            ]
+        },
+        "extraction_enrichment_protocol": {
+            "description": "Details of nucleic acid extraction and optional enrichment steps.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "library_protocol": {
+            "description": "Details of sequencing library construction.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "sequencing_protocol": {
+            "description": "Details of sequencing.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "protocol_arm": {
+            "description": "Used to indicate arm for protocols which have separate arms for bacterial and viral nucleic acids.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "bacterial",
+                "viral"
+            ]
+        },
+        "bioinformatics_protocol": {
+            "description": "Detail of initial bioinformatics protocol, for example versions of basecalling software and models used, any read quality filtering/trimming employed.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "dehumanisation_protocol": {
+            "description": "Details of bioinformatics method used for human read removal.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "is_public_dataset": {
+            "description": "The sample is from a public dataset. Please only set this after it has been made public.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "public_database_name": {
+            "description": "The public repository where the data is.",
+            "type": "choice",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "ENA",
+                "SRA"
+            ]
+        },
+        "public_database_accession": {
+            "description": "The accession for the data in the public database.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "ingest_report": {
+            "description": "HTML report summarising the read profile and taxa identified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "taxon_reports": {
+            "description": "Folder of all classification output files.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "human_filtered_reads_1": {
+            "description": "Compressed FASTQ of input reads that have been filtered for human reads.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "human_filtered_reads_2": {
+            "description": "Compressed FASTQ of input reads that have been filtered for human reads.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "unclassified_reads_1": {
+            "description": "Compressed FASTQ of input reads which could not be classified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "unclassified_reads_2": {
+            "description": "Compressed FASTQ of input reads which could not be classified.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_reads_1": {
+            "description": "Compressed FASTQ of input reads which were classified as viral.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_reads_2": {
+            "description": "Compressed FASTQ of input reads which were classified as viral.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_and_unclassified_reads_1": {
+            "description": "Compressed FASTQ of input reads which were classified as viral or were unclassified.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "viral_and_unclassified_reads_2": {
+            "description": "Compressed FASTQ of input reads which were classified as viral or were unclassified.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "total_bases": {
+            "description": "Total number of bases in the input FASTQ file(s), before any filtering.",
+            "type": "integer",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Min value: 0"
+            ]
+        },
+        "classifier": {
+            "description": "The classifier used.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "Kraken2"
+            ]
+        },
+        "classifier_version": {
+            "description": "Version of the classifier used.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "classifier_db": {
+            "description": "Database used for read classification.",
+            "type": "choice",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "values": [
+                "PlusPF"
+            ]
+        },
+        "classifier_db_date": {
+            "description": "Date classifier database was produced.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM-DD",
+                "Output format: YYYY-MM-DD"
+            ]
+        },
+        "ncbi_taxonomy_date": {
+            "description": "Date that the NCBI taxonomy dump was produced.",
+            "type": "date",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "restrictions": [
+                "Input formats: YYYY-MM-DD",
+                "Output format: YYYY-MM-DD"
+            ]
+        },
+        "scylla_version": {
+            "description": "Version of the scylla pipeline used.",
+            "type": "text",
+            "required": true,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "chimera_bam": {
+            "description": "BAM file of the human filtered read fraction aligned to the zeus database.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "is_chimera_published": {
+            "description": "Whether chimera has been run on this record or not.",
+            "type": "bool",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ],
+            "default": false
+        },
+        "alignment_db_version": {
+            "description": "Version of the Zeus database used.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "sylph_db_version": {
+            "description": "Sylph database version utilised to produce Sylph classifications.",
+            "type": "text",
+            "required": false,
+            "actions": [
+                "get",
+                "list",
+                "filter",
+                "history"
+            ]
+        },
+        "taxa_files": {
+            "description": "Table of all species level taxa extracted by the Scylla ingest pipeline.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "n_reads": {
+                    "description": "The number of reads extracted for the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "total_bases": {
+                    "description": "Total number of bases extracted for the taxa.",
+                    "type": "integer",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "avg_quality": {
+                    "description": "The mean quality of reads extracted for the taxa.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_len": {
+                    "description": "The mean length of reads extracted for the taxa.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "rank": {
+                    "description": "The rank of the taxa.",
+                    "type": "choice",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "C",
+                        "D",
+                        "F",
+                        "G",
+                        "K",
+                        "O",
+                        "P",
+                        "R",
+                        "S",
+                        "U"
+                    ]
+                },
+                "fastq_1": {
+                    "description": "Compressed FASTQ of extracted reads for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "fastq_2": {
+                    "description": "Compressed FASTQ of extracted reads for the taxa.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                }
+            }
+        },
+        "classifier_calls": {
+            "description": "Table summarising the NCBI taxonomy ids, counts and ranks of all taxa found by the classifier during the Scylla ingest pipeline.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "percentage": {
+                    "description": "The percentage of the (dehumanised) sample that the taxa represents.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "count_descendants": {
+                    "description": "The number of reads mapping to this taxa and all descendant taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "count_direct": {
+                    "description": "The number of reads mapping directly to the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "rank": {
+                    "description": "The rank of the taxa.",
+                    "type": "choice",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "C",
+                        "D",
+                        "F",
+                        "G",
+                        "K",
+                        "O",
+                        "P",
+                        "R",
+                        "S",
+                        "U"
+                    ]
+                },
+                "raw_rank": {
+                    "description": "The rank of the taxa including an intermediate grading.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "is_spike_in": {
+                    "description": "The taxa is a spike-in.",
+                    "type": "bool",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "default": false
+                }
+            }
+        },
+        "spike_in_info": {
+            "description": "Table containing results found for the provided spike-in.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "A human readable name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "reference_header": {
+                    "description": "Reference header for the individual sequence within the provided spike-in.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "mapped_count": {
+                    "description": "Number of reads which aligned to a reference sequence for the provided spike-in.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                }
+            }
+        },
+        "alignment_results": {
+            "description": "Table containing alignment results from the viral alignment stage of the CLIMB-TRE/chimera pipeline.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "Human readable scientific name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "segment": {
+                    "description": "Segment identifier for segmented viruses, empty otherwise.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "unique_accession": {
+                    "description": "Unique reference identifier in the alignment database (everything prior to the first whitespace in the FASTA header).",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "accession_description": {
+                    "description": "The comment for the reference sequence within the alignment database.",
+                    "type": "text",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "sequence_length": {
+                    "description": "Length of the reference sequence in the alignment database.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "evenness_value": {
+                    "description": "A percentage indicating how evenly read depths are distributed throughout the reference, with 0 being completely uneven, and 100 being perfectly even. Taken from https://academic.oup.com/nar/article/38/10/e116/2902812, under the \u201cCalculation of evenness score\u201d section, and calculated here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L102.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "mean_depth": {
+                    "description": "Mean of all depth values across the alignment reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "coverage_1x": {
+                    "description": "Percentage of the reference sequence covered with a depth of at least 1x.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "coverage_10x": {
+                    "description": "Percentage of the reference covered with a depth of at least 10x.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "mapped_reads": {
+                    "description": "Total number of reads mapped to the alignment reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "uniquely_mapped_reads": {
+                    "description": "Total number of reads which uniquely map to each reference sequence, calculated for each reference sequence here: https://github.com/CLIMB-TRE/chimera/blob/bca6fe6fe293f8e56d9e70627a846dda6f3d886a/bin/generate_alignment_report.py#L59-L82.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mapped_bases": {
+                    "description": "Approximation for the total number of bases mapped to the alignment reference, calculated from the length of the reference sequence multiplied by the mean depth of alignments to that reference.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_read_identity": {
+                    "description": "Mean of read identities across all alignments. Can be considered an approximation for identity of the source genome with the reference sequence. Calculated for each read here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L58",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "read_duplication_rate": {
+                    "description": "What proportion of the reads start and end in the same alignment reference position as at least one other read within the alignment. Calculated here: https://github.com/CLIMB-TRE/chimera/blob/dca3cacb949dabc902d0a12e5d11d36c6ac555fd/bin/generate_alignment_report.py#L76-L83",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "forward_proportion": {
+                    "description": "Proportion of reads which aligned to the forward strand. Between 0 and 1, with 0 indicating all reads aligned to the reverse strand, 1 the opposite. True hits should be close to 0.5 for this value for any reasonable mean depth.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
+                    ]
+                },
+                "mean_read_length": {
+                    "description": "Mean read length (inferred from CIGAR string) of all reads aligned to the reference sequence in question.",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_alignment_length": {
+                    "description": "Mean length of all alignments to the reference - different to mean read length aligned to the reference, since it only considers the aligned section of the reads.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_alignment_proportion": {
+                    "description": "Mean of the proportion of each read which makes up the alignment to the reference (functionally mean_alignment_length / mean_read_length)",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
+                    ]
+                },
+                "mean_alignment_complexity": {
+                    "description": "Mean sequence complexity of aligned bases; proportion of bases that differ from the preceding base.",
+                    "type": "decimal",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 1"
+                    ]
+                },
+                "total_score": {
+                    "description": "Sum of per-metric band scores from the CLIMB-TRE/chimera scoring matrix. Can be negative; the range depends on the scoring matrix used.",
+                    "type": "integer",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "confidence": {
+                    "description": "Confidence category assigned from total_score by the CLIMB-TRE/chimera scoring matrix.",
+                    "type": "choice",
+                    "required": false,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "values": [
+                        "fail",
+                        "high",
+                        "low",
+                        "medium",
+                        "unknown"
+                    ]
+                }
+            }
+        },
+        "sylph_results": {
+            "description": "Table containing sylph results from the Sylph classification stage of the CLIMB-TRE/chimera pipeline.",
+            "type": "relation",
+            "required": false,
+            "actions": [
+                "get",
+                "filter",
+                "history"
+            ],
+            "fields": {
+                "taxon_id": {
+                    "description": "The NCBI taxonomy id associated with the taxa.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "human_readable": {
+                    "description": "Human readable scientific name for the taxa.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_taxon_string": {
+                    "description": "Description of the taxonomic placement of the source contig within the Sylph database using GTDBs taxon string format.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_assembly_id": {
+                    "description": "Assembly ID (often genbank accession) for the contig within the sylph database, taken from GTDB.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "gtdb_contig_header": {
+                    "description": "From the origin FASTA record header as it appears in GTDB. Identical to 'Contig_name' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "taxonomic_abundance": {
+                    "description": "Normalized taxonomic abundance as a percentage. Identical to 'Taxonomic_abundance' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "sequence_abundance": {
+                    "description": "Normalized sequence abundance as a percentage. Identical to 'Sequence_abundance' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0",
+                        "Max value: 100"
+                    ]
+                },
+                "adjusted_ani": {
+                    "description": "If coverage adjustment is possible (cov is < 3x cov): returns coverage-adjusted ANI (Average Nucleotide Identity). If coverage is too low/high: returns naive_ani. Identical to 'Adjusted_ANI' in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "ani_confidence_interval": {
+                    "description": "[5%,95%] confidence intervals. If coverage adjustment is possible: float-float e.g. 98.52-99.55. If coverage is too low/high: NA-NA is given. Identical to 'ANI_5-95_percentile' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "effective_coverage": {
+                    "description": "Estimated '\u03bbeff' value, true value is not calculated, this is estimated based on kmers. More information is available in the sylph paper: https://www.nature.com/articles/s41587-024-02412-y. If coverage adjustment is possible, lambda estimate is given. Identical to 'Eff_cov' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "effective_coverage_confidence_interval": {
+                    "description": "[5%, 95%] confidence intervals for lambda. Same format rules as 'ani_confidence_interval'. Identical to 'Lambda_5-95_percentile' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "median_kmer_cov": {
+                    "description": "Median k-mer multiplicity for k-mers with >= 1 multiplicity. Identical to 'Median_cov' field in sylph profile output.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "mean_kmer_cov": {
+                    "description": "Mean k-mer multiplicity for k-mers with >= 1 multiplicity. Identical to 'Mean_cov_geq1' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "containment_index": {
+                    "description": "int/int showing the containment index (number of k-mers found in sample divided by total k-mers), e.g. 959/1053. Identical to 'Containment_ind' field in sylph profile output.",
+                    "type": "text",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ]
+                },
+                "naive_ani": {
+                    "description": "Containment ANI without coverage adjustment. Identical to 'Naive_ANI' field in sylph profile output.",
+                    "type": "decimal",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                },
+                "kmers_reassigned": {
+                    "description": "The number of k-mers reassigned away from the genome. Identical to 'Kmers_reassigned' field in sylph profile output.",
+                    "type": "integer",
+                    "required": true,
+                    "actions": [
+                        "get",
+                        "filter"
+                    ],
+                    "restrictions": [
+                        "Min value: 0"
+                    ]
+                }
+            }
+        }
+    }
+}
